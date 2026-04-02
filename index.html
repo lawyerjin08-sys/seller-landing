@@ -424,44 +424,51 @@ a{text-decoration:none;color:inherit;}
   max-width:480px;margin:0 auto 36px;word-break:keep-all;
 }
 .pricing-frame b{color:var(--text);font-weight:600;}
-.price-steps{
-  display:flex;flex-direction:column;gap:0;
-  max-width:540px;margin:0 auto;
+.pr-line{
+  padding:16px 0;text-align:center;max-width:520px;margin:0 auto;
 }
-.price-step{
-  display:flex;gap:20px;align-items:flex-start;
-  padding:24px 0;border-bottom:1px solid var(--border);
-  text-align:left;
+.pr-line-top{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:15px;color:var(--text-sub);
 }
-.price-step:last-child{border-bottom:none;}
-.price-step.highlighted{
-  border-left:4px solid var(--accent);
-  background:var(--accent-light);
-  padding:24px 20px;
-  border-radius:0 12px 12px 0;
-  margin:8px 0;
+.pr-line-desc{font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.5;}
+.pr-arrow{
+  text-align:center;color:var(--text-muted);font-size:18px;margin:12px 0;
 }
-.ps-num{
-  width:32px;height:32px;border-radius:50%;
+.pr-num{
+  width:28px;height:28px;border-radius:50%;
   background:var(--accent-light);color:var(--accent);
-  font-size:14px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
-.ps-content{flex:1;}
-.ps-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.ps-price{font-size:14px;font-weight:600;color:var(--accent);margin-bottom:6px;}
-.ps-desc{font-size:13px;color:var(--text-sub);line-height:1.6;}
-.ps-badge{
-  display:inline-block;font-size:11px;font-weight:700;
+.pr-card-main{
+  background:var(--accent-light);border:2px solid var(--accent);
+  border-radius:16px;padding:32px 28px;
+  box-shadow:0 4px 20px rgba(99,102,241,0.1);
+  max-width:520px;margin:0 auto;text-align:left;
+}
+.pr-badge{
+  display:inline-block;font-size:12px;font-weight:700;
   background:var(--accent);color:#fff;
-  padding:4px 12px;border-radius:100px;margin-bottom:8px;
+  padding:4px 14px;border-radius:100px;margin-bottom:16px;
 }
-.ps-highlight-box{
-  margin-top:8px;background:var(--accent-light);
-  padding:8px 16px;border-radius:8px;
-  font-weight:600;font-size:13px;color:var(--accent);
+.pr-card-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.pr-card-price{font-size:28px;font-weight:800;color:var(--accent);margin-bottom:12px;}
+.pr-card-desc{font-size:15px;color:var(--text-sub);line-height:1.6;}
+.pr-deduct{
+  text-align:center;font-size:14px;font-weight:600;color:var(--accent);
+  margin:20px 0;
 }
+.pr-card-sub{
+  background:var(--white);border:1px solid var(--accent-border);
+  border-radius:16px;padding:28px 24px;
+  max-width:520px;margin:0 auto;text-align:left;
+}
+.pr-card-sub .pr-card-title{font-size:18px;font-weight:700;}
+.pr-card-sub .pr-card-price{font-size:24px;}
+.pr-card-sub .pr-card-desc{font-size:14px;}
+.pr-price-note{font-size:13px;color:var(--text-muted);margin-top:2px;}
 
 
 /* ===== 7. 월정액 ===== */
@@ -554,8 +561,7 @@ a{text-decoration:none;color:inherit;}
   .btn-primary,.btn-secondary{width:100%;max-width:320px;justify-content:center;}
   .lawyer-card{padding:28px 20px;}
   .lawyer-photo{width:160px;}
-  .price-step{flex-direction:column;gap:10px;}
-  .ps-num{width:28px;height:28px;font-size:12px;}
+  .pr-card-main,.pr-card-sub{padding:24px 20px;}
   .review-grid{grid-template-columns:1fr;}
   .quiz-container{border-radius:12px;padding:28px 16px;}
   .quiz-modal{
@@ -1031,49 +1037,43 @@ a{text-decoration:none;color:inherit;}
     <div class="sec-label">PRICING</div>
     <h2 class="sec-title">비용 안내</h2>
     <div class="pricing-frame">
-      정산금 수천만원이 묶여 있다면,<br>
-      그 돈을 되찾는 첫 걸음입니다.
+      묶인 돈을 되찾는 데 드는 비용입니다.
     </div>
 
-    <div class="price-steps">
-      <div class="price-step">
-        <div class="ps-num">1</div>
-        <div class="ps-content">
-          <div class="ps-title">상황확인 전화</div>
-          <div class="ps-price">무료 · 10분</div>
-          <div class="ps-desc">변호사가 직접 전화합니다. 법적 대응 가능 여부를 바로 알려드립니다.</div>
-        </div>
-      </div>
-      <div class="price-step highlighted">
-        <div class="ps-num">2</div>
-        <div class="ps-content">
-          <div class="ps-badge">가장 많이 선택하는 단계</div>
-          <div class="ps-title">사건 검토 + 변호사 명의 내용증명</div>
-          <div class="ps-price">55만원</div>
-          <div class="ps-desc">정지 사유와 약관을 분석하고, 변호사 명의로 플랫폼에 내용증명을 발송합니다. 이 한 통으로 흐름이 바뀌는 경우가 많습니다.</div>
-          <div style="margin-top:8px;background:var(--accent-light);padding:8px 12px;border-radius:8px;font-size:14px;font-weight:700;color:var(--accent);">3단계 진행 시 차감됩니다</div>
-        </div>
-      </div>
-      <div class="price-step highlighted">
-        <div class="ps-num">3</div>
-        <div class="ps-content">
-          <div class="ps-title">소명 패키지</div>
-          <div class="ps-price">165만원</div>
-          <div class="ps-desc">소명서를 법적 논리로 재구성하고, 공정위 불공정약관 신고까지 예고합니다. 플랫폼 법무팀이 대응하는 태도가 달라집니다.</div>
-          <div class="ps-highlight-box">2단계 55만원 차감 → 추가 110만원</div>
-        </div>
-      </div>
-      <div class="price-step">
-        <div class="ps-num">4</div>
-        <div class="ps-content">
-          <div class="ps-title">정산금 반환 · 소송 대리</div>
-          <div class="ps-price">상담 후 안내</div>
-          <div class="ps-desc">정산금 규모와 상황에 따라 최적의 방법을 설계합니다. 상황확인 전화에서 구체적인 비용과 절차를 안내드립니다.</div>
-        </div>
-      </div>
+    <!-- 1단계: 텍스트 라인 -->
+    <div class="pr-line">
+      <div class="pr-line-top"><span class="pr-num">1</span> 상황확인 전화 · <b style="color:var(--accent)">무료 · 10분</b></div>
+      <div class="pr-line-desc">10분이면 법적 대응 가능 여부를 알 수 있습니다.</div>
+    </div>
+    <div class="pr-arrow">↓</div>
+
+    <!-- 2단계: 큰 강조 카드 -->
+    <div class="pr-card-main">
+      <span class="pr-badge">가장 많이 선택하는 단계</span>
+      <div class="pr-card-title">사건 검토 + 변호사 명의 내용증명</div>
+      <div class="pr-card-price">55만원</div>
+      <div class="pr-card-desc">정지 사유와 약관을 분석하고, 변호사 명의로 플랫폼에 내용증명을 발송합니다. 이 한 통으로 플랫폼의 태도가 달라지는 경우가 많습니다.</div>
     </div>
 
-    <div class="mid-cta">
+    <!-- 차감 안내 -->
+    <div class="pr-deduct">↓ 3단계로 넘어가면 55만원이 차감됩니다</div>
+
+    <!-- 3단계: 중간 강조 카드 -->
+    <div class="pr-card-sub">
+      <div class="pr-card-title">소명 패키지</div>
+      <div class="pr-card-price">추가 110만원</div>
+      <div class="pr-price-note">(2단계 55만원 차감 적용)</div>
+      <div class="pr-card-desc" style="margin-top:12px;">소명서를 법적 논리로 재구성하고, 공정위 불공정약관 신고까지 예고합니다. 플랫폼 법무팀이 대응하는 방식 자체가 바뀝니다.</div>
+    </div>
+
+    <!-- 4단계: 텍스트 라인 -->
+    <div class="pr-arrow">↓</div>
+    <div class="pr-line">
+      <div class="pr-line-top"><span class="pr-num">4</span> 본격 법적 대응 · <b style="color:var(--accent)">상담 후 안내</b></div>
+      <div class="pr-line-desc">정산금 반환 청구, 계정 정지 효력 정지 가처분, 손해배상 소송 등. 상황에 맞는 법적 절차를 설계합니다. 구체적인 비용은 상황확인 전화에서 안내드립니다.</div>
+    </div>
+
+    <div class="mid-cta" style="margin-top:32px;">
       <button onclick="openQuizModal()" class="btn-primary">1분 무료 상황확인</button>
     </div>
   </div>
