@@ -1354,6 +1354,7 @@ function createQuizEngine(prefix){
         showComplete();
       }).catch(function(error) {
         console.error('EmailJS error:', error);
+        alert('[디버그] EmailJS 전송 실패: ' + (error && error.text ? error.text : JSON.stringify(error)));
         showComplete();
       });
 
