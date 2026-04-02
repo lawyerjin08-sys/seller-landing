@@ -278,8 +278,9 @@ a{text-decoration:none;color:inherit;}
 /* ===== 3. WHY LAWYER ===== */
 .why-section{text-align:center;}
 .why-item{
-  background:var(--white);border-radius:16px;padding:32px 28px;
-  border:1px solid var(--border);margin-bottom:16px;
+  background:var(--white);border-radius:16px;padding:32px 28px 32px 32px;
+  border:1px solid var(--border);border-left:4px solid var(--accent);
+  margin-bottom:16px;
   max-width:600px;margin-left:auto;margin-right:auto;
   text-align:left;transition:all 0.2s;
   opacity:0;transform:translateY(24px);
@@ -294,8 +295,12 @@ a{text-decoration:none;color:inherit;}
   font-size:13px;font-weight:600;color:var(--text-muted);
   letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;
 }
+.why-q::before{
+  content:'●';font-size:8px;color:var(--accent);margin-right:6px;
+  vertical-align:middle;
+}
 .why-title{
-  font-size:22px;font-weight:800;color:var(--text);
+  font-size:24px;font-weight:800;color:var(--text);
   line-height:1.4;margin-bottom:8px;
 }
 .why-desc{font-size:15px;color:var(--text-sub);line-height:1.6;}
@@ -316,10 +321,19 @@ a{text-decoration:none;color:inherit;}
   background:var(--bg);border-radius:16px;padding:40px 32px;
   text-align:center;
 }
+.lawyer-photo-wrap{
+  position:relative;display:inline-block;margin-bottom:20px;
+}
+.lawyer-photo-wrap::before{
+  content:'';position:absolute;
+  width:220px;height:220px;background:var(--accent-light);
+  border-radius:20px;top:-20px;left:50%;transform:translateX(-50%);
+  z-index:0;
+}
 .lawyer-photo{
-  width:200px;height:auto;border-radius:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.1);
-  margin-bottom:20px;
+  position:relative;z-index:1;
+  width:180px;height:auto;border-radius:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.12);
 }
 .lawyer-name{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;}
 .lawyer-role{font-size:14px;color:var(--accent);font-weight:600;margin-bottom:0;}
@@ -346,7 +360,7 @@ a{text-decoration:none;color:inherit;}
 .timeline-item:first-child .timeline-dot{top:2px;}
 .timeline-year{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:2px;}
 .timeline-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.timeline-desc{font-size:13px;color:var(--text-sub);font-style:italic;line-height:1.5;}
+.timeline-desc{font-size:13px;color:var(--text-muted);font-style:italic;line-height:1.5;margin-top:4px;}
 
 
 /* ===== 5. REVIEWS ===== */
@@ -481,11 +495,16 @@ a{text-decoration:none;color:inherit;}
   max-width:520px;margin:0 auto;
 }
 .ret-mini{
-  background:var(--white);border-radius:12px;padding:20px;
-  border:1px solid var(--border);text-align:left;
+  background:var(--white);border-radius:12px;padding:24px;
+  border:1px solid var(--accent-border);text-align:left;
+  transition:all 0.2s;
 }
-.ret-mini-label{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px;}
-.ret-mini-text{font-size:14px;font-weight:500;color:var(--text);line-height:1.5;}
+.ret-mini:hover{
+  transform:translateY(-3px);
+  box-shadow:0 4px 16px rgba(99,102,241,0.12);
+}
+.ret-mini-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;}
+.ret-mini-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.5;}
 
 
 /* ===== 8. FAQ ===== */
@@ -545,7 +564,8 @@ a{text-decoration:none;color:inherit;}
   .cta-row{flex-direction:column;align-items:center;}
   .btn-primary,.btn-secondary{width:100%;max-width:320px;justify-content:center;}
   .lawyer-card{padding:28px 20px;}
-  .lawyer-photo{width:160px;}
+  .lawyer-photo{width:140px;}
+  .lawyer-photo-wrap::before{width:180px;height:180px;top:-16px;}
   .pr-card-main,.pr-card-sub{padding:24px 20px;}
   .ret-grid{grid-template-columns:1fr;}
   .review-grid{grid-template-columns:1fr;}
@@ -883,15 +903,17 @@ a{text-decoration:none;color:inherit;}
     <p class="sec-sub"></p>
 
     <div class="lawyer-card">
-      <img src="profile.jpg" alt="유환진 변호사" class="lawyer-photo">
+      <div class="lawyer-photo-wrap">
+        <img src="profile.jpg" alt="유환진 변호사" class="lawyer-photo">
+      </div>
       <div class="lawyer-name">유환진</div>
       <div class="lawyer-role">대표변호사</div>
 
       <div class="lawyer-quote">
-        "판사 옆에서 3년, 대형로펌에서 실전.<br>
-        플랫폼이 계정을 막고 정산금을 묶어도,<br>
-        변호사가 개입하면 태도가 달라집니다.<br>
-        <span class="quote-highlight">셀러의 돈은 셀러의 것입니다.</span>"
+        "판사 옆에서 3년, 판결이 어떻게 만들어지는지 직접 봤습니다.<br>
+        어떤 증거가 결정적이고, 어떤 주장이 통하는지.<br>
+        그 눈으로 지금은 셀러의 계정과 정산금을 지킵니다.<br>
+        <span class="quote-highlight">셀러가 번 돈은 셀러의 것입니다.</span>"
       </div>
 
       <div class="timeline">
@@ -1071,7 +1093,7 @@ a{text-decoration:none;color:inherit;}
   <div class="inner">
     <div class="sec-label">MONTHLY PLAN</div>
     <h2 class="sec-title">다시 멈추지 않기 위한 법률 파트너</h2>
-    <p class="sec-sub">한 번 정지되면 아는 거잖아요. 다음엔 미리 막아야 합니다.</p>
+    <p class="sec-sub">계정 복구 후에도 안심할 수 없다면, 변호사가 옆에 있으면 됩니다.</p>
 
     <div class="ret-price-big">월 55만원</div>
     <div class="ret-price-sub">계약 기간 없음 · 언제든 해지</div>
