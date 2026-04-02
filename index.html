@@ -914,21 +914,21 @@ a{text-decoration:none;color:inherit;}
   <div class="inner">
     <div class="sec-label">CONTACT</div>
     <h2 class="sec-title">내 상황,<br>1분이면 확인됩니다.</h2>
-    <p class="sec-sub">간단한 질문 5개에 답하면, 변호사가 직접 연락드립니다.</p>
+    <p class="sec-sub">간단한 질문 4개에 답하면, 맞춤 분석 결과를 바로 확인할 수 있습니다.</p>
 
     <div class="quiz-container" id="quiz">
       <!-- Progress -->
       <div class="quiz-progress">
-        <span class="quiz-progress-text" id="quiz-progress-text">5개 중 1번째</span>
+        <span class="quiz-progress-text" id="quiz-progress-text">4단계 중 1번째</span>
         <div class="quiz-progress-circle">
           <svg width="40" height="40" viewBox="0 0 40 40">
             <circle class="track" cx="20" cy="20" r="17"/>
-            <circle class="fill" id="quiz-circle" cx="20" cy="20" r="17" stroke-dasharray="106.8" stroke-dashoffset="85.4"/>
+            <circle class="fill" id="quiz-circle" cx="20" cy="20" r="17" stroke-dasharray="106.8" stroke-dashoffset="80.1"/>
           </svg>
         </div>
       </div>
       <div class="quiz-bar">
-        <div class="quiz-bar-fill" id="quiz-bar" style="width:20%"></div>
+        <div class="quiz-bar-fill" id="quiz-bar" style="width:25%"></div>
       </div>
 
       <!-- Q1: 플랫폼 -->
@@ -1066,14 +1066,32 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="quiz-nav">
           <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-          <button class="quiz-next" onclick="quizNext()">다음</button>
+          <button class="quiz-next" onclick="quizShowResult()">다음</button>
         </div>
       </div>
 
-      <!-- Q5 (연락처 입력) -->
-      <div class="quiz-step" data-step="5">
-        <div class="quiz-question">변호사가 직접 전화드립니다.</div>
-        <p style="font-size:14px;color:var(--text-sub);margin:-16px 0 24px;text-align:left;line-height:1.6;">입력하신 정보를 바탕으로 상황을 분석한 후 연락드립니다.</p>
+      <!-- 결과 화면 + 연락처 입력 -->
+      <div class="quiz-step" data-step="result">
+        <!-- 상단 완료 표시 -->
+        <div style="text-align:center;margin-bottom:24px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:#ecfdf5;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+            <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="font-size:22px;font-weight:700;color:var(--text);">분석이 완료되었습니다</div>
+        </div>
+
+        <!-- 결과 카드 (JS가 채움) -->
+        <div id="quiz-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
+          <div id="quiz-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
+          <div id="quiz-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
+          <div id="quiz-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+
+        <!-- 연락처 입력 -->
+        <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:left;">지금 바로 변호사와 통화하세요.</div>
+        <p style="font-size:14px;color:var(--text-sub);margin-bottom:20px;text-align:left;line-height:1.6;">입력하신 내용을 바탕으로, 변호사가 구체적인 대응 방법을 안내드립니다.</p>
 
         <div class="quiz-form-group">
           <label class="quiz-form-label">이름</label>
@@ -1090,21 +1108,17 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="quiz-privacy" id="q-privacy">
           <table>
-            <tr><th>수집 항목</th><td>성함, 전화번호, 상담 상황</td></tr>
+            <tr><th>수집 항목</th><td>성함, 전화번호</td></tr>
             <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
             <tr><th>보유 기간</th><td>상담 완료 후 3년 또는 동의 철회 시까지</td></tr>
           </table>
           <p style="margin:0;font-size:12px;color:var(--text-muted);">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
         </div>
 
-        <div class="quiz-nav" style="margin-top:0;">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-          <div></div>
-        </div>
-
-        <button class="quiz-submit" onclick="quizSubmit()" style="margin-top:16px;">무료 상황확인 신청하기</button>
+        <button class="quiz-submit" onclick="quizSubmit()">무료 상황확인 신청하기</button>
         <p class="quiz-note">🔒 입력하신 정보는 상담 목적으로만 사용됩니다</p>
         <a href="#kakao" class="btn-kakao">💬 카카오톡으로 문의하기</a>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;line-height:1.5;">유환진 변호사 · 서울고법 재판연구원 출신 · 영업시간 내 2시간 이내 연락</p>
       </div>
     </div>
   </div>
@@ -1148,15 +1162,20 @@ a{text-decoration:none;color:inherit;}
 <script>
 (function(){
   var current = 1;
-  var total = 5;
+  var questionSteps = 4; // Q1~Q4
   var answers = {};
-  var circumference = 2 * Math.PI * 17; // ~106.8
+  var circumference = 2 * Math.PI * 17;
+  var progressEl = document.getElementById('quiz-progress-text');
+  var barEl = document.getElementById('quiz-bar');
+  var circleEl = document.getElementById('quiz-circle');
+  var progressRow = document.querySelector('.quiz-progress');
+  var barRow = document.querySelector('.quiz-bar');
 
   function updateProgress(){
-    document.getElementById('quiz-progress-text').textContent = total + '개 중 ' + current + '번째';
-    document.getElementById('quiz-bar').style.width = (current / total * 100) + '%';
-    var offset = circumference - (current / total) * circumference;
-    document.getElementById('quiz-circle').setAttribute('stroke-dashoffset', offset);
+    progressEl.textContent = '5단계 중 ' + current + '번째';
+    barEl.style.width = (current / questionSteps * 100) + '%';
+    var offset = circumference - (current / questionSteps) * circumference;
+    circleEl.setAttribute('stroke-dashoffset', offset);
   }
 
   function showStep(n){
@@ -1164,13 +1183,20 @@ a{text-decoration:none;color:inherit;}
     steps.forEach(function(s){ s.classList.remove('active'); });
     var target = document.querySelector('.quiz-step[data-step="' + n + '"]');
     if(target) target.classList.add('active');
-    updateProgress();
-    updateNextBtn();
+    if(n === 'result'){
+      progressRow.style.display = 'none';
+      barRow.style.display = 'none';
+    } else {
+      progressRow.style.display = '';
+      barRow.style.display = '';
+      updateProgress();
+      updateNextBtn();
+    }
   }
 
   function updateNextBtn(){
-    if(current >= total) return;
     var step = document.querySelector('.quiz-step[data-step="' + current + '"]');
+    if(!step) return;
     var btn = step.querySelector('.quiz-next');
     if(!btn) return;
     var selected = step.querySelector('.quiz-option.selected');
@@ -1194,7 +1220,7 @@ a{text-decoration:none;color:inherit;}
   });
 
   window.quizNext = function(){
-    if(current >= total) return;
+    if(current >= questionSteps) return;
     var step = document.querySelector('.quiz-step[data-step="' + current + '"]');
     var selected = step.querySelector('.quiz-option.selected');
     if(!selected) return;
@@ -1206,6 +1232,55 @@ a{text-decoration:none;color:inherit;}
     if(current <= 1) return;
     current--;
     showStep(current);
+  };
+
+  // 결과 화면 표시
+  window.quizShowResult = function(){
+    var step = document.querySelector('.quiz-step[data-step="4"]');
+    var selected = step.querySelector('.quiz-option.selected');
+    if(!selected) return;
+
+    // 분기 로직
+    var amount = answers.amount || '';
+    var attempt = answers.attempt || '';
+    var highAmount = (amount === '500만원~3,000만원' || amount === '3,000만원~1억원' || amount === '1억원 이상');
+    var lowAmount = (amount === '없음' || amount === '500만원 미만');
+    var rejected = (attempt === '직접 해봤는데 반려' || attempt === '대행사 맡김' || attempt === '여러 번 반려');
+    var notYet = (attempt === '아직 안 해봄');
+
+    var title, body;
+    if(highAmount && rejected){
+      title = '법적 대응으로 충분히 해결 가능한 상황입니다.';
+      body = '이미 소명까지 시도한 상태라면, 지금이 변호사가 개입할 최적의 타이밍입니다. 묶인 정산금은 대규모유통업법상 20일 내 정산이 원칙이며, 변호사 명의 내용증명만으로 기류가 바뀌는 경우가 많습니다. 계정 복구와 정산금 반환, 동시에 진행할 수 있습니다.';
+    } else if(highAmount && notYet){
+      title = '지금 바로 대응하면 가장 유리합니다.';
+      body = '소명 전에 변호사가 먼저 개입하면, 처음부터 법적 논리가 탄탄한 소명서를 제출할 수 있어 반려 확률이 크게 줄어듭니다. 정산금이 보류되기 전에 선제적으로 움직이면 자금이 묶이는 것 자체를 막을 수 있습니다.';
+    } else if(lowAmount && rejected){
+      title = '계정 복구에 집중할 수 있는 상황입니다.';
+      body = '소명이 반려됐더라도, 변호사가 법률의견서를 첨부하여 다시 제출하면 플랫폼 법무팀의 검토 방식 자체가 달라집니다. 같은 사안이라도 법적 근거가 보강되면 결과가 바뀔 수 있습니다.';
+    } else if(lowAmount && notYet){
+      title = '빠르게 대응하면 충분히 해결 가능합니다.';
+      body = '아직 초기 단계라면 오히려 좋습니다. 처음부터 변호사와 함께 준비하면 불필요한 시행착오 없이 가장 빠른 경로로 계정을 복구할 수 있습니다.';
+    } else {
+      title = '변호사가 직접 상황을 확인해드립니다.';
+      body = '입력하신 내용을 바탕으로, 법적 대응 가능 여부와 예상 절차를 무료로 안내드립니다. 10분이면 충분합니다.';
+    }
+
+    document.getElementById('quiz-result-title').textContent = title;
+    document.getElementById('quiz-result-body').textContent = body;
+
+    // 태그 표시
+    var tagsEl = document.getElementById('quiz-result-tags');
+    tagsEl.innerHTML = '';
+    var tagValues = [answers.platform, answers.reason, answers.amount, answers.attempt].filter(Boolean);
+    tagValues.forEach(function(v){
+      var tag = document.createElement('span');
+      tag.style.cssText = 'display:inline-block;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--accent);border:1px solid var(--accent-border);';
+      tag.textContent = v;
+      tagsEl.appendChild(tag);
+    });
+
+    showStep('result');
   };
 
   window.quizSubmit = function(){
@@ -1220,7 +1295,6 @@ a{text-decoration:none;color:inherit;}
     answers.name = name;
     answers.phone = phone;
 
-    // For now, just show confirmation
     var container = document.getElementById('quiz');
     container.innerHTML =
       '<div style="text-align:center;padding:40px 0;">' +
