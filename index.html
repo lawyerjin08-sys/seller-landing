@@ -83,7 +83,7 @@ a{text-decoration:none;color:inherit;}
 
 /* ===== 1. HERO ===== */
 .hero{
-  background:var(--bg);padding:64px 0 72px;text-align:center;
+  background:var(--bg);padding:64px 0 0;text-align:center;
   position:relative;
 }
 .hero::before{
@@ -130,14 +130,29 @@ a{text-decoration:none;color:inherit;}
 }
 .btn-secondary:hover{background:var(--bg);border-color:#d1d5db;}
 .btn-sub{font-size:13px;color:var(--text-muted);margin-top:14px;}
-.hero-stats{
-  display:flex;justify-content:center;gap:32px;
-  margin-top:52px;padding-top:44px;border-top:1px solid var(--border);
+.hero-platforms{
+  display:inline-flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  margin-top:20px;
 }
-.h-stat{text-align:center;}
-.h-stat-val{font-size:30px;font-weight:800;color:var(--dark);letter-spacing:-0.03em;line-height:1;}
-.h-stat-val .u{font-size:15px;font-weight:600;color:var(--accent);}
-.h-stat-lbl{font-size:12px;color:var(--text-muted);margin-top:7px;line-height:1.4;}
+.hero-platforms .hp{
+  display:inline-block;
+  background:var(--accent-light);border:1px solid var(--accent-border);
+  border-radius:100px;padding:5px 14px;
+  font-size:12px;font-weight:500;color:var(--accent);
+}
+.hero-platforms .hp.main{font-size:13px;font-weight:700;}
+.hero-proof{
+  background:var(--accent-light);padding:36px 24px;margin-top:40px;
+}
+.hero-proof-inner{
+  max-width:600px;margin:0 auto;
+  display:flex;justify-content:space-around;gap:24px;
+}
+.hp-item{text-align:center;}
+.hp-val{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;}
+.hp-val .hp-suffix{font-size:18px;font-weight:600;opacity:0;transition:opacity 0.4s;}
+.hp-lbl{font-size:13px;color:var(--text-sub);margin-top:6px;font-weight:400;}
+.hp-free{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
 
 /* ===== 2. 이런 상황이라면 ===== */
@@ -531,8 +546,11 @@ a{text-decoration:none;color:inherit;}
 @media(max-width:640px){
   .inner{padding:0 20px;}
   .sec-white,.sec-gray,.sec-dark{padding:60px 0;}
-  .hero{padding:48px 0 56px;}
-  .hero-stats{flex-direction:column;gap:20px;}
+  .hero{padding:48px 0 0;}
+  .hp-val,.hp-free{font-size:28px;}
+  .hp-val .hp-suffix{font-size:15px;}
+  .hero-proof-inner{gap:16px;}
+  .hero-proof{padding:28px 16px;}
   .sit-grid{grid-template-columns:1fr;}
   .compare-grid{flex-direction:column;align-items:stretch;}
   .cmp-card.weak,.cmp-card.strong{flex:1;}
@@ -577,19 +595,27 @@ a{text-decoration:none;color:inherit;}
       <a href="#pricing-section" class="btn-secondary">비용 먼저 확인하기</a>
     </div>
     <p class="btn-sub">변호사가 직접 전화합니다 · 영업시간 내 2시간 이내</p>
-    <p style="font-size:13px;color:var(--text-muted);margin-top:20px;">쿠팡 · 스마트스토어 · 11번가 · G마켓 · 옥션 대응</p>
-    <div class="hero-stats">
-      <div class="h-stat">
-        <div class="h-stat-val">180<span class="u">일</span></div>
-        <div class="h-stat-lbl">플랫폼 최대<br>정산 보류 기간</div>
+    <div class="hero-platforms">
+      <span class="hp main">쿠팡</span>
+      <span class="hp main">스마트스토어</span>
+      <span class="hp">11번가</span>
+      <span class="hp">G마켓</span>
+      <span class="hp">옥션</span>
+    </div>
+  </div>
+  <div class="hero-proof" id="hero-proof">
+    <div class="hero-proof-inner">
+      <div class="hp-item">
+        <div class="hp-val"><span id="count-sellers">0</span><span class="hp-suffix">+</span></div>
+        <div class="hp-lbl">셀러가 먼저 찾았습니다</div>
       </div>
-      <div class="h-stat">
-        <div class="h-stat-val">20<span class="u">일</span></div>
-        <div class="h-stat-lbl">법정<br>정산 의무 기한</div>
+      <div class="hp-item">
+        <div class="hp-val"><span id="count-amount">0</span><span class="hp-suffix">억+</span></div>
+        <div class="hp-lbl">반환받은 정산금</div>
       </div>
-      <div class="h-stat">
-        <div class="h-stat-val">30<span class="u">%</span></div>
-        <div class="h-stat-lbl">입점 업체 불공정거래<br>경험 비율<br><span style="font-size:11px;color:var(--text-muted);">(중소기업중앙회, 2025)</span></div>
+      <div class="hp-item">
+        <div class="hp-free" id="count-free">무료</div>
+        <div class="hp-lbl">첫 상황확인</div>
       </div>
     </div>
   </div>
@@ -642,7 +668,7 @@ a{text-decoration:none;color:inherit;}
   <div class="inner">
     <div class="sec-label">WHY LAWYER</div>
     <h2 class="sec-title">소명서 대필이 전부가 아닙니다.</h2>
-    <p class="sec-sub">대행사는 여기까지. 변호사는 여기서부터.</p>
+    <p class="sec-sub">대행사는 여기까지. 변호사는 여기서부터.<br>플랫폼은 최대 180일간 정산금을 보류합니다. 법은 20일 내 정산을 요구합니다.</p>
 
     <div class="compare-grid">
       <!-- 소명 대행 (약한 카드) -->
@@ -1308,6 +1334,45 @@ a{text-decoration:none;color:inherit;}
   };
 
   updateProgress();
+})();
+</script>
+
+<!-- ===== COUNT-UP JS ===== -->
+<script>
+(function(){
+  function countUp(el, target, duration){
+    var startTime = performance.now();
+    function update(now){
+      var elapsed = now - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString();
+      if(progress < 1){
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = target.toLocaleString();
+        var suffix = el.nextElementSibling;
+        if(suffix && suffix.classList.contains('hp-suffix')) suffix.style.opacity = '1';
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  var fired = false;
+  var observer = new IntersectionObserver(function(entries){
+    if(fired) return;
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        fired = true;
+        countUp(document.getElementById('count-sellers'), 600, 1500);
+        countUp(document.getElementById('count-amount'), 11, 1200);
+        document.getElementById('count-free').style.opacity = '1';
+        observer.disconnect();
+      }
+    });
+  }, {threshold: 0.3});
+
+  observer.observe(document.getElementById('hero-proof'));
 })();
 </script>
 
