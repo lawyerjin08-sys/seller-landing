@@ -201,7 +201,7 @@ a{text-decoration:none;color:inherit;}
   font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;
 }
 .ic-no{background:#f3f4f6;color:#d1d5db;}
-.ic-yes{background:var(--accent-light);color:var(--accent);}
+.ic-yes{background:#ecfdf5;color:#059669;}
 .cmp-card.active .cmp-item{color:var(--text);}
 
 
@@ -409,6 +409,42 @@ a{text-decoration:none;color:inherit;}
   .ps-num{width:28px;height:28px;font-size:12px;}
   .form-box{padding:28px 20px;}
 }
+
+/* ===== PRIVACY MODAL ===== */
+.modal-overlay{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.5);z-index:200;
+  align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--white);border-radius:16px;padding:32px 28px;
+  max-width:480px;width:90%;max-height:80vh;overflow-y:auto;
+  position:relative;
+}
+.modal-box h3{font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text);}
+.modal-box table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:14px;}
+.modal-box th,.modal-box td{
+  border:1px solid var(--border);padding:10px 12px;text-align:left;
+}
+.modal-box th{background:var(--bg);font-weight:600;color:var(--text);white-space:nowrap;width:30%;}
+.modal-box td{color:var(--text-sub);line-height:1.5;}
+.modal-box .modal-note{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;}
+.modal-close{
+  width:100%;padding:12px;font-size:15px;font-weight:600;
+  background:var(--accent);color:#fff;border:none;border-radius:10px;
+  cursor:pointer;font-family:inherit;
+}
+.modal-close:hover{background:var(--accent-hover);}
+
+/* ===== KAKAO BUTTON ===== */
+.btn-kakao{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;font-size:15px;font-weight:600;
+  background:#FEE500;color:#000;border:none;border-radius:12px;
+  cursor:pointer;font-family:inherit;margin-top:12px;transition:all 0.15s;
+}
+.btn-kakao:hover{background:#f5dc00;}
 </style>
 </head>
 <body>
@@ -417,7 +453,7 @@ a{text-decoration:none;color:inherit;}
 <nav class="nav">
   <div class="inner">
     <div class="nav-logo"><span class="dot"></span>유앤파트너스</div>
-    <a href="#form-section" class="nav-cta">무료 상담 신청</a>
+    <a href="#form-section" class="nav-cta">무료 상황확인</a>
   </div>
 </nav>
 
@@ -459,8 +495,8 @@ a{text-decoration:none;color:inherit;}
         <div class="h-stat-lbl">법정<br>정산 의무 기한</div>
       </div>
       <div class="h-stat">
-        <div class="h-stat-val">8<span class="u">%</span></div>
-        <div class="h-stat-lbl">대행사 내용증명<br>재발 방지 효과</div>
+        <div class="h-stat-val">30<span class="u">%</span></div>
+        <div class="h-stat-lbl">입점 업체 불공정거래<br>경험 비율<br><span style="font-size:11px;color:var(--text-muted);">(중소기업중앙회, 2025)</span></div>
       </div>
     </div>
   </div>
@@ -518,19 +554,19 @@ a{text-decoration:none;color:inherit;}
     <div class="compare-grid">
       <div class="cmp-card">
         <div class="cmp-label gray">소명 대행</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>소명서·개선계획서 대필</div>
-        <div class="cmp-item"><span class="ic ic-no">✗</span>변호사 명의 내용증명</div>
-        <div class="cmp-item"><span class="ic ic-no">✗</span>정산금 반환 법적 청구</div>
-        <div class="cmp-item"><span class="ic ic-no">✗</span>공정위 불공정약관 신고</div>
-        <div class="cmp-item"><span class="ic ic-no">✗</span>가처분·소송</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>소명서·개선계획서 대필</div>
+        <div class="cmp-item"><span class="ic ic-no"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#e5e7eb"/><path d="M7 7l6 6M13 7l-6 6" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/></svg></span>변호사 명의 내용증명</div>
+        <div class="cmp-item"><span class="ic ic-no"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#e5e7eb"/><path d="M7 7l6 6M13 7l-6 6" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/></svg></span>정산금 반환 법적 청구</div>
+        <div class="cmp-item"><span class="ic ic-no"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#e5e7eb"/><path d="M7 7l6 6M13 7l-6 6" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/></svg></span>공정위 불공정약관 신고</div>
+        <div class="cmp-item"><span class="ic ic-no"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#e5e7eb"/><path d="M7 7l6 6M13 7l-6 6" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/></svg></span>가처분·소송</div>
       </div>
       <div class="cmp-card active">
         <div class="cmp-label purple">변호사</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>소명서 + 법적 논리 보강</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>변호사 명의 내용증명</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>정산금 반환 법적 청구</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>공정위 불공정약관 신고</div>
-        <div class="cmp-item"><span class="ic ic-yes">✓</span>가처분·소송</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>소명서 + 법적 논리 보강</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>변호사 명의 내용증명</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>정산금 반환 법적 청구</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>공정위 불공정약관 신고</div>
+        <div class="cmp-item"><span class="ic ic-yes"><svg width="12" height="12" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>가처분·소송</div>
       </div>
     </div>
   </div>
@@ -545,6 +581,7 @@ a{text-decoration:none;color:inherit;}
     <p class="sec-sub"></p>
 
     <div class="lawyer-card">
+      <div style="width:100px;height:100px;border-radius:50%;background:var(--accent);color:#fff;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">유</div>
       <div class="lawyer-name">유환진</div>
       <div class="lawyer-role">유앤파트너스 대표변호사</div>
       <div class="lawyer-quote">
@@ -585,7 +622,7 @@ a{text-decoration:none;color:inherit;}
 
     <div class="case-list">
       <div class="case-card">
-        <span class="case-tag green">정산금 반환</span>
+        <span class="case-tag green">반환 사례</span>
         <div class="case-title">영구정지 후 묶인 정산금 2,400만원 — 반환 성공</div>
         <div class="case-body">
           계정이 영구정지된 후 정산 예정 금액이 전액 보류됐습니다.
@@ -597,7 +634,7 @@ a{text-decoration:none;color:inherit;}
       </div>
 
       <div class="case-card">
-        <span class="case-tag blue">계정 복구</span>
+        <span class="case-tag blue">복구 사례</span>
         <div class="case-title">가품 의심 계정 정지 — 법률의견서 제출 후 복구</div>
         <div class="case-body">
           정품을 판매했으나 유통경로 소명이 부족해 계정이 정지됐습니다.
@@ -609,7 +646,7 @@ a{text-decoration:none;color:inherit;}
       </div>
 
       <div class="case-card">
-        <span class="case-tag blue">연관계정 해제</span>
+        <span class="case-tag blue">해제 사례</span>
         <div class="case-title">1개 계정 문제로 3개 계정 연쇄 정지 — 분리 성공</div>
         <div class="case-body">
           지재권 위반으로 정지된 A계정 때문에 동일 장소에서 접속한
@@ -621,7 +658,7 @@ a{text-decoration:none;color:inherit;}
       </div>
     </div>
 
-    <p class="case-disclaimer">구체적 사실관계는 각색되었습니다. 모든 사건의 결과는 개별 상황에 따라 다릅니다.</p>
+    <p class="case-disclaimer">실제 사례를 바탕으로 재구성했습니다. 모든 사건의 결과는 개별 상황에 따라 다릅니다.</p>
 
     <div class="mid-cta">
       <a href="#form-section" class="btn-primary">내 상황도 가능한지 확인하기</a>
@@ -636,8 +673,8 @@ a{text-decoration:none;color:inherit;}
     <div class="sec-label">PRICING</div>
     <h2 class="sec-title">비용 안내</h2>
     <div class="pricing-frame">
-      정산금 <b>3,000만원</b>이 묶여 있다면,<br>
-      그 돈을 되찾는 데 드는 비용입니다.
+      수백만원이든 수천만원이든,<br>
+      묶인 정산금을 되찾는 데 드는 비용입니다.
     </div>
 
     <div class="price-steps">
@@ -654,7 +691,8 @@ a{text-decoration:none;color:inherit;}
         <div class="ps-content">
           <div class="ps-title">사건 검토 + 변호사 명의 내용증명</div>
           <div class="ps-price">55만원</div>
-          <div class="ps-desc">정지 사유·약관 분석, 대응 전략 수립, 변호사 명의 내용증명 발송까지. 3단계 진행 시 차감됩니다.</div>
+          <div class="ps-desc">정지 사유·약관 분석, 대응 전략 수립, 변호사 명의 내용증명 발송까지.</div>
+          <div style="margin-top:8px;background:var(--accent-light);padding:8px 12px;border-radius:8px;font-size:14px;font-weight:700;color:var(--accent);">3단계 진행 시 차감됩니다</div>
         </div>
       </div>
       <div class="price-step">
@@ -686,7 +724,7 @@ a{text-decoration:none;color:inherit;}
 <section class="sec-white retainer" style="padding-top:0;">
   <div class="inner">
     <div class="retainer-card">
-      <div class="ret-title">다시는 같은 일을 당하지 않으려면</div>
+      <div class="ret-title">계정이 복구된 후, 안전하게 운영하려면</div>
       <div class="ret-price">월정액 법률 자문 — 월 55만원 · 언제든 해지 가능</div>
       <ul class="ret-list">
         <li>상품 등록 전 지재권 리스크 사전 점검</li>
@@ -729,7 +767,7 @@ a{text-decoration:none;color:inherit;}
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">대행사에서 안 됐는데 변호사가 하면 다른가요?</div>
-        <div class="faq-a">대행사는 소명서 대필까지만 가능합니다. 변호사는 법률의견서 발송, 정산금 반환 소송, 공정위 신고, 가처분 신청 등 법적 강제력을 행사할 수 있습니다. 플랫폼 법무팀이 대응하는 태도 자체가 달라집니다.</div>
+        <div class="faq-a">대행사가 해주는 소명서 대필도 중요한 첫 단계입니다. 다만 그걸로 안 됐을 때, 변호사는 법률의견서 발송, 정산금 반환 소송, 공정위 신고, 가처분 신청 등 법적 강제력을 행사할 수 있습니다. 플랫폼 법무팀이 대응하는 태도 자체가 달라집니다.</div>
       </div>
     </div>
   </div>
@@ -764,10 +802,11 @@ a{text-decoration:none;color:inherit;}
       </div>
       <div class="form-check">
         <input type="checkbox" id="agree">
-        <label for="agree"><a href="#">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
+        <label for="agree"><a href="#" onclick="event.preventDefault();document.getElementById('privacy-modal').classList.add('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
       </div>
       <button class="form-submit">상담 신청하기</button>
       <p class="form-note">🔒 입력하신 정보는 상담 목적으로만 사용됩니다</p>
+      <a href="#kakao" class="btn-kakao">💬 카카오톡으로 문의하기</a>
     </div>
   </div>
 </section>
@@ -790,6 +829,20 @@ a{text-decoration:none;color:inherit;}
   </div>
 </section>
 
+
+<!-- ===== PRIVACY MODAL ===== -->
+<div class="modal-overlay" id="privacy-modal" onclick="if(event.target===this)this.classList.remove('open');">
+  <div class="modal-box">
+    <h3>개인정보 수집·이용 동의</h3>
+    <table>
+      <tr><th>수집 항목</th><td>성함, 전화번호, 상담 상황</td></tr>
+      <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
+      <tr><th>보유 기간</th><td>상담 완료 후 3년 또는 동의 철회 시까지</td></tr>
+    </table>
+    <p class="modal-note">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
+    <button class="modal-close" onclick="document.getElementById('privacy-modal').classList.remove('open');">확인</button>
+  </div>
+</div>
 
 </body>
 </html>
