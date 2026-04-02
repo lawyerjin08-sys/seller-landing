@@ -404,6 +404,7 @@ a{text-decoration:none;color:inherit;}
   transform:translateY(-4px);
   box-shadow:0 8px 24px rgba(0,0,0,0.1);
 }
+.review-card.indigo-bar{border-left:4px solid var(--accent);}
 .review-card.green-bar{border-left:4px solid #059669;}
 .reviews-more-section{display:none;}
 .reviews-more-section.open{display:block;}
@@ -952,7 +953,7 @@ a{text-decoration:none;color:inherit;}
 
     <!-- 초기 노출: 2,400만원 + 계정 복구 -->
     <div class="review-grid">
-      <div class="review-card">
+      <div class="review-card indigo-bar">
         <span class="review-tag normal">쿠팡 · 건강기능식품</span>
         <div class="review-amount normal">2,400만원 반환</div>
         <div class="review-impact">"'이게 원래 내 돈이 맞구나' 처음으로 그렇게 느꼈습니다."</div>
@@ -981,7 +982,7 @@ a{text-decoration:none;color:inherit;}
     <!-- 펼치면 나오는 카드: 8,000만원 + 연관계정 -->
     <div class="reviews-more-section" id="reviews-more-section">
       <div class="review-grid">
-        <div class="review-card">
+        <div class="review-card indigo-bar">
           <span class="review-tag normal">스마트스토어 · 여성의류</span>
           <div class="review-amount normal">8,000만원 반환</div>
           <div class="review-impact">"이 돈 못 받았으면 사업 접어야 했을 수도 있어요."</div>
@@ -1002,8 +1003,6 @@ a{text-decoration:none;color:inherit;}
         </div>
       </div>
     </div>
-
-    <p class="review-disclaimer">실제 의뢰인 후기를 바탕으로 재구성했습니다. 모든 사건의 결과는 개별 상황에 따라 다릅니다.</p>
 
     <div class="mid-cta">
       <button onclick="openQuizModal()" class="btn-primary">내 상황도 가능한지 확인하기</button>
