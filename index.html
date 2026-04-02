@@ -158,7 +158,14 @@ a{text-decoration:none;color:inherit;}
 .hp-free{font-size:36px;font-weight:800;color:#4f46e5;letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
 
-/* ===== QUIZ MODAL ===== */
+/* ===== QUIZ (shared styles for inline + modal) ===== */
+.quiz-section{background:var(--bg);padding:80px 0;text-align:center;}
+.quiz-container{
+  max-width:520px;margin:0 auto;
+  background:var(--white);border-radius:20px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+  padding:36px 28px;
+}
 .quiz-overlay{
   display:none;position:fixed;top:0;left:0;width:100%;height:100%;
   z-index:9999;background:rgba(0,0,0,0.5);
@@ -206,7 +213,6 @@ a{text-decoration:none;color:inherit;}
 }
 .quiz-option:hover{border-color:var(--accent-border);background:var(--accent-light);}
 .quiz-option.selected{border-color:var(--accent);background:var(--accent-light);}
-.quiz-option .qo-icon{font-size:20px;flex-shrink:0;}
 .quiz-option .qo-text{flex:1;}
 .quiz-option .qo-text .qo-title{font-size:15px;font-weight:600;color:var(--text);}
 .quiz-option .qo-text .qo-desc{font-size:13px;color:var(--text-sub);margin-top:2px;line-height:1.4;}
@@ -544,6 +550,7 @@ a{text-decoration:none;color:inherit;}
 @media(max-width:640px){
   .inner{padding:0 20px;}
   .sec-white,.sec-gray,.sec-dark{padding:60px 0;}
+  .quiz-section{padding:60px 0;}
   .hero{padding:48px 0 0;}
   .hp-val,.hp-free{font-size:28px;}
   .hp-val .hp-suffix{font-size:15px;}
@@ -558,6 +565,7 @@ a{text-decoration:none;color:inherit;}
   .price-step{flex-direction:column;gap:10px;}
   .ps-num{width:28px;height:28px;font-size:12px;}
   .review-grid{grid-template-columns:1fr;}
+  .quiz-container{border-radius:12px;padding:28px 16px;}
   .quiz-modal{
     width:100%;height:100%;max-height:100vh;
     border-radius:0;margin:0;
@@ -581,15 +589,15 @@ a{text-decoration:none;color:inherit;}
 <div class="quiz-overlay" id="quiz-overlay" onclick="if(event.target===this)closeQuizModal()">
   <div class="quiz-modal">
     <button class="quiz-close" onclick="closeQuizModal()">&times;</button>
-    <div id="quiz">
+    <div id="modal-quiz">
       <div class="quiz-progress">
-        <span class="quiz-progress-text" id="quiz-progress-text">4단계 중 1번째</span>
+        <span class="quiz-progress-text" id="modal-progress-text">4단계 중 1번째</span>
       </div>
       <div class="quiz-bar">
-        <div class="quiz-bar-fill" id="quiz-bar" style="width:25%"></div>
+        <div class="quiz-bar-fill" id="modal-bar" style="width:25%"></div>
       </div>
 
-      <!-- Q1: 플랫폼 -->
+      <!-- Q1 -->
       <div class="quiz-step active" data-step="1">
         <div class="quiz-question">어떤 플랫폼인가요?</div>
         <div class="quiz-options" data-name="platform">
@@ -599,42 +607,23 @@ a{text-decoration:none;color:inherit;}
           <div class="quiz-option" data-value="G마켓·옥션"><span>G마켓·옥션</span><span class="qo-check"></span></div>
           <div class="quiz-option" data-value="기타"><span>기타</span><span class="qo-check"></span></div>
         </div>
-        <div class="quiz-nav">
-          <button class="quiz-back hidden">← 이전</button>
-        </div>
+        <div class="quiz-nav"><button class="quiz-back hidden">← 이전</button></div>
       </div>
 
-      <!-- Q2: 정지 사유 -->
+      <!-- Q2 -->
       <div class="quiz-step" data-step="2">
         <div class="quiz-question">정지 사유가 뭔가요?</div>
         <div class="quiz-options" data-name="reason">
-          <div class="quiz-option" data-value="가품 의심">
-            <span class="qo-text"><span class="qo-title">가품 의심</span><span class="qo-desc">정품인데 가품 판정. 소명도 안 먹힌다.</span></span>
-            <span class="qo-check"></span>
-          </div>
-          <div class="quiz-option" data-value="지재권 침해">
-            <span class="qo-text"><span class="qo-title">지재권 침해</span><span class="qo-desc">지재권 신고 한 방에 계정까지 날아갔다.</span></span>
-            <span class="qo-check"></span>
-          </div>
-          <div class="quiz-option" data-value="연관계정 정지">
-            <span class="qo-text"><span class="qo-title">연관계정 정지</span><span class="qo-desc">내 잘못도 아닌데 연쇄 정지. 억울하다.</span></span>
-            <span class="qo-check"></span>
-          </div>
-          <div class="quiz-option" data-value="정산금 보류">
-            <span class="qo-text"><span class="qo-title">정산금 보류</span><span class="qo-desc">이미 판 돈인데 수천만원이 묶여 있다.</span></span>
-            <span class="qo-check"></span>
-          </div>
-          <div class="quiz-option" data-value="기타/잘 모르겠음">
-            <span class="qo-text"><span class="qo-title">기타/잘 모르겠음</span></span>
-            <span class="qo-check"></span>
-          </div>
+          <div class="quiz-option" data-value="가품 의심"><span class="qo-text"><span class="qo-title">가품 의심</span><span class="qo-desc">정품인데 가품 판정. 소명도 안 먹힌다.</span></span><span class="qo-check"></span></div>
+          <div class="quiz-option" data-value="지재권 침해"><span class="qo-text"><span class="qo-title">지재권 침해</span><span class="qo-desc">지재권 신고 한 방에 계정까지 날아갔다.</span></span><span class="qo-check"></span></div>
+          <div class="quiz-option" data-value="연관계정 정지"><span class="qo-text"><span class="qo-title">연관계정 정지</span><span class="qo-desc">내 잘못도 아닌데 연쇄 정지. 억울하다.</span></span><span class="qo-check"></span></div>
+          <div class="quiz-option" data-value="정산금 보류"><span class="qo-text"><span class="qo-title">정산금 보류</span><span class="qo-desc">이미 판 돈인데 수천만원이 묶여 있다.</span></span><span class="qo-check"></span></div>
+          <div class="quiz-option" data-value="기타/잘 모르겠음"><span class="qo-text"><span class="qo-title">기타/잘 모르겠음</span></span><span class="qo-check"></span></div>
         </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="modalQuiz.prev()">← 이전</button></div>
       </div>
 
-      <!-- Q3: 정산금 -->
+      <!-- Q3 -->
       <div class="quiz-step" data-step="3">
         <div class="quiz-question">묶인 정산금이 얼마 정도인가요?</div>
         <div class="quiz-options" data-name="amount">
@@ -644,12 +633,10 @@ a{text-decoration:none;color:inherit;}
           <div class="quiz-option" data-value="3,000만원~1억원"><span>3,000만원 ~ 1억원</span><span class="qo-check"></span></div>
           <div class="quiz-option" data-value="1억원 이상"><span>1억원 이상</span><span class="qo-check"></span></div>
         </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="modalQuiz.prev()">← 이전</button></div>
       </div>
 
-      <!-- Q4: 소명 경험 -->
+      <!-- Q4 -->
       <div class="quiz-step" data-step="4">
         <div class="quiz-question">소명서를 제출해보셨나요?</div>
         <div class="quiz-options" data-name="attempt">
@@ -658,12 +645,10 @@ a{text-decoration:none;color:inherit;}
           <div class="quiz-option" data-value="대행사 맡김"><span>대행사에 맡겨봤는데 안 됨</span><span class="qo-check"></span></div>
           <div class="quiz-option" data-value="여러 번 반려"><span>여러 번 시도했지만 계속 반려</span><span class="qo-check"></span></div>
         </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="modalQuiz.prev()">← 이전</button></div>
       </div>
 
-      <!-- 결과 화면 + 연락처 -->
+      <!-- 결과 -->
       <div class="quiz-step" data-step="result">
         <div style="text-align:center;margin-bottom:24px;">
           <div style="width:56px;height:56px;border-radius:50%;background:#ecfdf5;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
@@ -671,32 +656,27 @@ a{text-decoration:none;color:inherit;}
           </div>
           <div style="font-size:22px;font-weight:700;color:var(--text);">확인했습니다.</div>
         </div>
-
-        <div id="quiz-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
-          <div id="quiz-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
-          <div id="quiz-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
-          <div id="quiz-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+        <div id="modal-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
+          <div id="modal-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
+          <div id="modal-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
+          <div id="modal-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
         </div>
-
         <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
-
         <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:left;">지금 바로 변호사와 통화하세요.</div>
         <p style="font-size:14px;color:var(--text-sub);margin-bottom:20px;text-align:left;line-height:1.6;">입력하신 내용을 바탕으로, 변호사가 구체적인 대응 방법을 안내드립니다.</p>
-
         <div class="quiz-form-group">
           <label class="quiz-form-label">이름</label>
-          <input type="text" class="quiz-form-input" id="q-name" placeholder="홍길동">
+          <input type="text" class="quiz-form-input" id="modal-name" placeholder="홍길동">
         </div>
         <div class="quiz-form-group">
           <label class="quiz-form-label">전화번호</label>
-          <input type="tel" class="quiz-form-input" id="q-phone" placeholder="010-0000-0000">
+          <input type="tel" class="quiz-form-input" id="modal-phone" placeholder="010-0000-0000">
         </div>
-
         <div class="quiz-check">
-          <input type="checkbox" id="q-agree">
-          <label for="q-agree"><a onclick="document.getElementById('q-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
+          <input type="checkbox" id="modal-agree">
+          <label for="modal-agree"><a onclick="document.getElementById('modal-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
         </div>
-        <div class="quiz-privacy" id="q-privacy">
+        <div class="quiz-privacy" id="modal-privacy">
           <table>
             <tr><th>수집 항목</th><td>성함, 전화번호</td></tr>
             <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
@@ -704,8 +684,7 @@ a{text-decoration:none;color:inherit;}
           </table>
           <p style="margin:0;font-size:12px;color:var(--text-muted);">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
         </div>
-
-        <button class="quiz-submit" onclick="quizSubmit()">1분 무료 상황확인</button>
+        <button class="quiz-submit" onclick="modalQuiz.submit()">1분 무료 상황확인</button>
         <p class="quiz-note">입력하신 정보는 상담 목적으로만 사용됩니다</p>
         <a href="#kakao" class="btn-kakao">카카오톡으로 문의하기</a>
         <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;line-height:1.5;">유환진 변호사 · 서울고법 재판연구원 출신 · 영업시간 내 2시간 이내 연락</p>
@@ -729,10 +708,10 @@ a{text-decoration:none;color:inherit;}
       소명서로 안 되는 문제, 변호사가 법적으로 풀어드립니다.
     </p>
     <div class="cta-row">
-      <button onclick="openQuizModal()" class="btn-primary">
+      <a href="#quiz-section" class="btn-primary">
         <svg viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         1분 무료 상황확인
-      </button>
+      </a>
       <a href="#pricing-section" class="btn-secondary">비용 먼저 확인하기</a>
     </div>
     <p class="btn-sub"><span class="btn-sub-highlight">변호사가 직접 전화합니다</span> · 영업시간 내 2시간 이내</p>
@@ -757,6 +736,120 @@ a{text-decoration:none;color:inherit;}
       <div class="hp-item">
         <div class="hp-free" id="count-free">무료</div>
         <div class="hp-lbl">첫 상황확인</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== 2. INLINE QUIZ SECTION ===== -->
+<section class="quiz-section" id="quiz-section">
+  <div class="inner">
+    <div class="sec-label">YOUR SITUATION</div>
+    <h2 class="sec-title">내 상황, 1분이면 확인됩니다.</h2>
+    <p class="sec-sub">간단한 질문 4개에 답하면, 맞춤 분석 결과를 바로 확인할 수 있습니다.</p>
+
+    <div class="quiz-container">
+      <div id="inline-quiz">
+        <div class="quiz-progress">
+          <span class="quiz-progress-text" id="inline-progress-text">4단계 중 1번째</span>
+        </div>
+        <div class="quiz-bar">
+          <div class="quiz-bar-fill" id="inline-bar" style="width:25%"></div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="quiz-step active" data-step="1">
+          <div class="quiz-question">어떤 플랫폼인가요?</div>
+          <div class="quiz-options" data-name="platform">
+            <div class="quiz-option" data-value="쿠팡"><span>쿠팡</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="스마트스토어"><span>스마트스토어</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="11번가"><span>11번가</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="G마켓·옥션"><span>G마켓·옥션</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="기타"><span>기타</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav"><button class="quiz-back hidden">← 이전</button></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-step" data-step="2">
+          <div class="quiz-question">정지 사유가 뭔가요?</div>
+          <div class="quiz-options" data-name="reason">
+            <div class="quiz-option" data-value="가품 의심"><span class="qo-text"><span class="qo-title">가품 의심</span><span class="qo-desc">정품인데 가품 판정. 소명도 안 먹힌다.</span></span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="지재권 침해"><span class="qo-text"><span class="qo-title">지재권 침해</span><span class="qo-desc">지재권 신고 한 방에 계정까지 날아갔다.</span></span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="연관계정 정지"><span class="qo-text"><span class="qo-title">연관계정 정지</span><span class="qo-desc">내 잘못도 아닌데 연쇄 정지. 억울하다.</span></span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="정산금 보류"><span class="qo-text"><span class="qo-title">정산금 보류</span><span class="qo-desc">이미 판 돈인데 수천만원이 묶여 있다.</span></span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="기타/잘 모르겠음"><span class="qo-text"><span class="qo-title">기타/잘 모르겠음</span></span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav"><button class="quiz-back" onclick="inlineQuiz.prev()">← 이전</button></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-step" data-step="3">
+          <div class="quiz-question">묶인 정산금이 얼마 정도인가요?</div>
+          <div class="quiz-options" data-name="amount">
+            <div class="quiz-option" data-value="없음"><span>없음 (정산금 이슈 없음)</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="500만원 미만"><span>500만원 미만</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="500만원~3,000만원"><span>500만원 ~ 3,000만원</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="3,000만원~1억원"><span>3,000만원 ~ 1억원</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="1억원 이상"><span>1억원 이상</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav"><button class="quiz-back" onclick="inlineQuiz.prev()">← 이전</button></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-step" data-step="4">
+          <div class="quiz-question">소명서를 제출해보셨나요?</div>
+          <div class="quiz-options" data-name="attempt">
+            <div class="quiz-option" data-value="아직 안 해봄"><span>아직 안 해봤음</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="직접 해봤는데 반려"><span>직접 해봤는데 반려됨</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="대행사 맡김"><span>대행사에 맡겨봤는데 안 됨</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="여러 번 반려"><span>여러 번 시도했지만 계속 반려</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav"><button class="quiz-back" onclick="inlineQuiz.prev()">← 이전</button></div>
+        </div>
+
+        <!-- 결과 -->
+        <div class="quiz-step" data-step="result">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div style="width:56px;height:56px;border-radius:50%;background:#ecfdf5;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="font-size:22px;font-weight:700;color:var(--text);">확인했습니다.</div>
+          </div>
+          <div id="inline-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
+            <div id="inline-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
+            <div id="inline-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
+            <div id="inline-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+          </div>
+          <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+          <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:left;">지금 바로 변호사와 통화하세요.</div>
+          <p style="font-size:14px;color:var(--text-sub);margin-bottom:20px;text-align:left;line-height:1.6;">입력하신 내용을 바탕으로, 변호사가 구체적인 대응 방법을 안내드립니다.</p>
+          <div class="quiz-form-group">
+            <label class="quiz-form-label">이름</label>
+            <input type="text" class="quiz-form-input" id="inline-name" placeholder="홍길동">
+          </div>
+          <div class="quiz-form-group">
+            <label class="quiz-form-label">전화번호</label>
+            <input type="tel" class="quiz-form-input" id="inline-phone" placeholder="010-0000-0000">
+          </div>
+          <div class="quiz-check">
+            <input type="checkbox" id="inline-agree">
+            <label for="inline-agree"><a onclick="document.getElementById('inline-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
+          </div>
+          <div class="quiz-privacy" id="inline-privacy">
+            <table>
+              <tr><th>수집 항목</th><td>성함, 전화번호</td></tr>
+              <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
+              <tr><th>보유 기간</th><td>상담 완료 후 3년 또는 동의 철회 시까지</td></tr>
+            </table>
+            <p style="margin:0;font-size:12px;color:var(--text-muted);">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
+          </div>
+          <button class="quiz-submit" onclick="inlineQuiz.submit()">1분 무료 상황확인</button>
+          <p class="quiz-note">입력하신 정보는 상담 목적으로만 사용됩니다</p>
+          <a href="#kakao" class="btn-kakao">카카오톡으로 문의하기</a>
+          <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;line-height:1.5;">유환진 변호사 · 서울고법 재판연구원 출신 · 영업시간 내 2시간 이내 연락</p>
+        </div>
       </div>
     </div>
   </div>
@@ -886,7 +979,6 @@ a{text-decoration:none;color:inherit;}
     <div class="sec-label">REVIEWS</div>
     <h2 class="sec-title">먼저 경험한 셀러들</h2>
 
-    <!-- Featured card (full-width) -->
     <div class="review-featured">
       <span class="review-tag featured">쿠팡·11번가 · 해외구매대행 법인</span>
       <div class="review-amount featured">1억 2,700만원 반환</div>
@@ -896,7 +988,6 @@ a{text-decoration:none;color:inherit;}
       <div class="review-result">✓ 정산금 전액 반환</div>
     </div>
 
-    <!-- 2x2 grid -->
     <div class="review-grid">
       <div class="review-card">
         <span class="review-tag normal">쿠팡 · 건강기능식품</span>
@@ -1084,15 +1175,16 @@ function closeQuizModal(){
   document.body.classList.remove('modal-open');
 }
 
-// Quiz logic
-(function(){
+// Reusable quiz engine factory
+function createQuizEngine(prefix){
+  var root = document.getElementById(prefix + '-quiz');
   var current = 1;
   var questionSteps = 4;
   var answers = {};
-  var progressEl = document.getElementById('quiz-progress-text');
-  var barEl = document.getElementById('quiz-bar');
-  var progressRow = document.querySelector('.quiz-progress');
-  var barRow = document.querySelector('.quiz-bar');
+  var progressEl = document.getElementById(prefix + '-progress-text');
+  var barEl = document.getElementById(prefix + '-bar');
+  var progressRow = root.querySelector('.quiz-progress');
+  var barRow = root.querySelector('.quiz-bar');
 
   function updateProgress(){
     progressEl.textContent = '4단계 중 ' + current + '번째';
@@ -1100,9 +1192,8 @@ function closeQuizModal(){
   }
 
   function showStep(n){
-    var steps = document.querySelectorAll('.quiz-step');
-    steps.forEach(function(s){ s.classList.remove('active'); });
-    var target = document.querySelector('.quiz-step[data-step="' + n + '"]');
+    root.querySelectorAll('.quiz-step').forEach(function(s){ s.classList.remove('active'); });
+    var target = root.querySelector('.quiz-step[data-step="' + n + '"]');
     if(target) target.classList.add('active');
     if(n === 'result'){
       progressRow.style.display = 'none';
@@ -1112,52 +1203,22 @@ function closeQuizModal(){
       barRow.style.display = '';
       updateProgress();
     }
-    // Scroll modal to top
-    var modal = document.querySelector('.quiz-modal');
-    if(modal) modal.scrollTop = 0;
+    if(prefix === 'modal'){
+      var modal = root.closest('.quiz-modal');
+      if(modal) modal.scrollTop = 0;
+    } else {
+      var container = root.closest('.quiz-container');
+      if(container) container.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
   }
 
-  // Auto-advance on option click
-  document.querySelectorAll('.quiz-option').forEach(function(opt){
-    opt.addEventListener('click', function(){
-      var parent = this.closest('.quiz-options');
-      parent.querySelectorAll('.quiz-option').forEach(function(o){ o.classList.remove('selected'); });
-      this.classList.add('selected');
-      answers[parent.getAttribute('data-name')] = this.getAttribute('data-value');
-
-      var stepEl = this.closest('.quiz-step');
-      var stepNum = stepEl.getAttribute('data-step');
-
-      if(stepNum !== 'result'){
-        setTimeout(function(){
-          if(parseInt(stepNum) < questionSteps){
-            current = parseInt(stepNum) + 1;
-            showStep(current);
-          } else if(parseInt(stepNum) === questionSteps){
-            quizShowResult();
-          }
-        }, 300);
-      }
-    });
-  });
-
-  window.quizPrev = function(){
-    if(current <= 1) return;
-    current--;
-    showStep(current);
-  };
-
-  window.quizShowResult = function(){
-    var step = document.querySelector('.quiz-step[data-step="4"]');
-    if(!step.querySelector('.quiz-option.selected')) return;
-
+  function getResultText(){
     var amount = answers.amount || '';
     var attempt = answers.attempt || '';
     var highAmount = (amount === '500만원~3,000만원' || amount === '3,000만원~1억원' || amount === '1억원 이상');
     var lowAmount = (amount === '없음' || amount === '500만원 미만');
     var rejected = (attempt === '직접 해봤는데 반려' || attempt === '대행사 맡김' || attempt === '여러 번 반려');
     var notYet = (attempt === '아직 안 해봄');
-
     var title, body;
     if(highAmount && rejected){
       title = '지금이 가장 좋은 타이밍입니다.';
@@ -1175,47 +1236,80 @@ function closeQuizModal(){
       title = '10분이면 방향이 잡힙니다.';
       body = '변호사가 직접 상황을 확인하고, 법적 대응 가능 여부를 바로 알려드립니다.';
     }
+    return {title:title, body:body};
+  }
 
-    document.getElementById('quiz-result-title').textContent = title;
-    document.getElementById('quiz-result-body').textContent = body;
-
-    var tagsEl = document.getElementById('quiz-result-tags');
-    tagsEl.innerHTML = '';
-    [answers.platform, answers.reason, answers.amount, answers.attempt].filter(Boolean).forEach(function(v){
-      var tag = document.createElement('span');
-      tag.style.cssText = 'display:inline-block;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--accent);border:1px solid var(--accent-border);';
-      tag.textContent = v;
-      tagsEl.appendChild(tag);
+  // Auto-advance on option click
+  root.querySelectorAll('.quiz-option').forEach(function(opt){
+    opt.addEventListener('click', function(){
+      var parent = this.closest('.quiz-options');
+      parent.querySelectorAll('.quiz-option').forEach(function(o){ o.classList.remove('selected'); });
+      this.classList.add('selected');
+      answers[parent.getAttribute('data-name')] = this.getAttribute('data-value');
+      var stepEl = this.closest('.quiz-step');
+      var stepNum = stepEl.getAttribute('data-step');
+      if(stepNum !== 'result'){
+        setTimeout(function(){
+          if(parseInt(stepNum) < questionSteps){
+            current = parseInt(stepNum) + 1;
+            showStep(current);
+          } else if(parseInt(stepNum) === questionSteps){
+            engine.showResult();
+          }
+        }, 300);
+      }
     });
+  });
 
-    showStep('result');
-  };
-
-  window.quizSubmit = function(){
-    var name = document.getElementById('q-name').value.trim();
-    var phone = document.getElementById('q-phone').value.trim();
-    var agree = document.getElementById('q-agree').checked;
-
-    if(!name){ alert('이름을 입력해주세요.'); return; }
-    if(!phone){ alert('전화번호를 입력해주세요.'); return; }
-    if(!agree){ alert('개인정보 수집·이용에 동의해주세요.'); return; }
-
-    answers.name = name;
-    answers.phone = phone;
-
-    document.getElementById('quiz').innerHTML =
-      '<div style="text-align:center;padding:40px 0;">' +
-      '<div style="font-size:48px;margin-bottom:16px;">✅</div>' +
-      '<div style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">신청이 완료되었습니다</div>' +
-      '<div style="font-size:15px;color:var(--text-sub);line-height:1.7;">' +
-      name + '님, 입력하신 정보를 확인했습니다.<br>' +
-      '영업시간 내 2시간 이내로 변호사가 직접 전화드립니다.' +
-      '</div>' +
-      '</div>';
+  var engine = {
+    prev: function(){
+      if(current <= 1) return;
+      current--;
+      showStep(current);
+    },
+    showResult: function(){
+      var step = root.querySelector('.quiz-step[data-step="4"]');
+      if(!step.querySelector('.quiz-option.selected')) return;
+      var r = getResultText();
+      document.getElementById(prefix + '-result-title').textContent = r.title;
+      document.getElementById(prefix + '-result-body').textContent = r.body;
+      var tagsEl = document.getElementById(prefix + '-result-tags');
+      tagsEl.innerHTML = '';
+      [answers.platform, answers.reason, answers.amount, answers.attempt].filter(Boolean).forEach(function(v){
+        var tag = document.createElement('span');
+        tag.style.cssText = 'display:inline-block;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--accent);border:1px solid var(--accent-border);';
+        tag.textContent = v;
+        tagsEl.appendChild(tag);
+      });
+      showStep('result');
+    },
+    submit: function(){
+      var name = document.getElementById(prefix + '-name').value.trim();
+      var phone = document.getElementById(prefix + '-phone').value.trim();
+      var agree = document.getElementById(prefix + '-agree').checked;
+      if(!name){ alert('이름을 입력해주세요.'); return; }
+      if(!phone){ alert('전화번호를 입력해주세요.'); return; }
+      if(!agree){ alert('개인정보 수집·이용에 동의해주세요.'); return; }
+      answers.name = name;
+      answers.phone = phone;
+      root.innerHTML =
+        '<div style="text-align:center;padding:40px 0;">' +
+        '<div style="font-size:48px;margin-bottom:16px;">✅</div>' +
+        '<div style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">신청이 완료되었습니다</div>' +
+        '<div style="font-size:15px;color:var(--text-sub);line-height:1.7;">' +
+        name + '님, 입력하신 정보를 확인했습니다.<br>' +
+        '영업시간 내 2시간 이내로 변호사가 직접 전화드립니다.' +
+        '</div></div>';
+    }
   };
 
   updateProgress();
-})();
+  return engine;
+}
+
+// Initialize both quiz instances
+var inlineQuiz = createQuizEngine('inline');
+var modalQuiz = createQuizEngine('modal');
 
 // Count-up animation
 (function(){
