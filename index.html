@@ -27,6 +27,7 @@
   --red-bg: #fef2f2;
   --red-border: #fecaca;
 }
+html{scroll-behavior:smooth;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
@@ -34,7 +35,6 @@ body{
   color:var(--text);
   background:var(--white);
 }
-body.modal-open{overflow:hidden;}
 a{text-decoration:none;color:inherit;}
 .inner{max-width:800px;margin:0 auto;padding:0 24px;}
 
@@ -58,7 +58,7 @@ a{text-decoration:none;color:inherit;}
 .nav-cta{
   font-size:13px;font-weight:600;color:var(--accent);
   padding:7px 16px;border:1px solid var(--accent-border);border-radius:8px;
-  transition:all 0.15s;cursor:pointer;
+  transition:all 0.15s;cursor:pointer;display:inline-block;
 }
 .nav-cta:hover{background:var(--accent-light);}
 
@@ -156,30 +156,103 @@ a{text-decoration:none;color:inherit;}
 .hp-free{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
 
-/* ===== 2. 이런 상황이라면 ===== */
-.situations{text-align:center;}
-.sit-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px;
-  max-width:600px;margin:0 auto 32px;
+/* ===== 2. QUIZ SECTION (inline) ===== */
+.quiz-section{background:var(--bg);padding:80px 0;text-align:center;}
+.quiz-container{
+  max-width:520px;margin:0 auto;
+  background:var(--white);border-radius:20px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+  padding:36px 28px;
 }
-.sit-card{
-  background:var(--bg);border:1px solid var(--border);border-radius:12px;
-  padding:20px 18px;text-align:left;transition:all 0.15s;
+.quiz-progress{
+  display:flex;align-items:center;margin-bottom:8px;
 }
-.sit-card:hover{border-color:var(--accent-border);background:var(--accent-light);}
-.sit-card.highlight{
-  background:var(--accent-light);border:1px solid var(--accent-border);
+.quiz-progress-text{font-size:13px;font-weight:600;color:var(--text-sub);}
+.quiz-bar{
+  width:100%;height:4px;background:var(--border);border-radius:2px;
+  margin-bottom:32px;overflow:hidden;
 }
-.sit-card .sit-icon{font-size:20px;margin-bottom:10px;}
-.sit-card .sit-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.sit-card .sit-desc{font-size:13px;color:var(--text-sub);line-height:1.5;}
-.sit-highlight{
-  background:var(--accent-light);border:1px solid var(--accent-border);
-  border-radius:12px;padding:28px 32px;max-width:600px;margin:0 auto;
-  text-align:center;
+.quiz-bar-fill{
+  height:100%;background:var(--accent);border-radius:2px;
+  transition:width 0.4s ease;
 }
-.sit-highlight p{font-size:18px;color:var(--accent);font-weight:700;line-height:1.6;}
-.mid-cta{text-align:center;margin-top:36px;}
+.quiz-step{display:none;animation:quizFadeIn 0.35s ease;}
+.quiz-step.active{display:block;}
+@keyframes quizFadeIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.quiz-question{
+  font-size:20px;font-weight:700;color:var(--text);
+  margin-bottom:24px;text-align:left;line-height:1.4;
+}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.quiz-option{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 18px;border:1.5px solid var(--border);border-radius:12px;
+  background:var(--white);cursor:pointer;transition:all 0.15s;
+  text-align:left;font-size:15px;color:var(--text);
+}
+.quiz-option:hover{border-color:var(--accent-border);background:var(--accent-light);}
+.quiz-option.selected{border-color:var(--accent);background:var(--accent-light);}
+.quiz-option .qo-icon{font-size:20px;flex-shrink:0;}
+.quiz-option .qo-text{flex:1;}
+.quiz-option .qo-text .qo-title{font-size:15px;font-weight:600;color:var(--text);}
+.quiz-option .qo-text .qo-desc{font-size:13px;color:var(--text-sub);margin-top:2px;line-height:1.4;}
+.quiz-option .qo-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-left:auto;transition:all 0.15s;
+}
+.quiz-option.selected .qo-check{border-color:var(--accent);background:var(--accent);}
+.quiz-option.selected .qo-check::after{
+  content:'';display:block;width:6px;height:6px;border-radius:50%;background:#fff;
+}
+.quiz-nav{display:flex;justify-content:flex-start;align-items:center;margin-top:8px;}
+.quiz-back{
+  font-size:14px;font-weight:600;color:var(--text-muted);
+  background:none;border:none;cursor:pointer;padding:8px 0;font-family:inherit;
+  display:flex;align-items:center;gap:4px;
+}
+.quiz-back:hover{color:var(--text-sub);}
+.quiz-back.hidden{visibility:hidden;}
+.quiz-form-group{margin-bottom:16px;text-align:left;}
+.quiz-form-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;}
+.quiz-form-input{
+  width:100%;padding:14px 16px;font-size:15px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:inherit;color:var(--text);
+  transition:border-color 0.15s;background:var(--white);
+}
+.quiz-form-input:focus{outline:none;border-color:var(--accent);}
+.quiz-check{display:flex;align-items:flex-start;gap:8px;margin-bottom:20px;text-align:left;}
+.quiz-check input{margin-top:3px;accent-color:var(--accent);}
+.quiz-check label{font-size:13px;color:var(--text-sub);line-height:1.4;}
+.quiz-check a{color:var(--accent);text-decoration:underline;cursor:pointer;}
+.quiz-privacy{
+  display:none;background:var(--bg);border-radius:10px;padding:16px;
+  margin:-12px 0 16px;text-align:left;font-size:13px;color:var(--text-sub);line-height:1.6;
+}
+.quiz-privacy.open{display:block;}
+.quiz-privacy table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:13px;}
+.quiz-privacy th,.quiz-privacy td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+.quiz-privacy th{background:var(--white);font-weight:600;color:var(--text);white-space:nowrap;width:28%;}
+.quiz-submit{
+  width:100%;padding:16px;font-size:16px;font-weight:600;
+  background:var(--accent);color:#fff;border:none;border-radius:12px;
+  cursor:pointer;transition:all 0.2s;font-family:inherit;
+  box-shadow:0 4px 18px rgba(99,102,241,0.28);
+}
+.quiz-submit:hover{background:var(--accent-hover);transform:translateY(-1px);}
+.quiz-note{
+  font-size:12px;color:var(--text-muted);margin-top:14px;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+}
+.btn-kakao{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;font-size:15px;font-weight:600;
+  background:#FEE500;color:#000;border:none;border-radius:12px;
+  cursor:pointer;font-family:inherit;margin-top:12px;transition:all 0.15s;
+}
+.btn-kakao:hover{background:#f5dc00;}
 
 
 /* ===== 3. WHY LAWYER (비대칭 비교) ===== */
@@ -268,33 +341,42 @@ a{text-decoration:none;color:inherit;}
 .career-text{font-size:14px;color:var(--text-sub);line-height:1.5;}
 
 
-/* ===== 5. 해결 사례 ===== */
-.cases{text-align:center;}
-.case-list{
-  display:flex;flex-direction:column;gap:16px;
-  max-width:600px;margin:0 auto;
-}
-.case-card{
-  background:var(--white);border:1px solid var(--border);
+/* ===== 5. REVIEWS ===== */
+.reviews{text-align:center;}
+.review-featured{
+  max-width:600px;margin:0 auto 20px;
+  background:var(--accent-light);border:2px solid var(--accent);
   border-radius:14px;padding:28px 24px;text-align:left;
 }
-.case-tag{
+.review-amount{font-weight:800;letter-spacing:-0.03em;line-height:1.2;margin-bottom:10px;}
+.review-amount.featured{font-size:36px;color:var(--accent);}
+.review-amount.normal{font-size:28px;color:var(--accent);}
+.review-amount.green{font-size:28px;color:var(--green);}
+.review-tag{
   display:inline-block;font-size:11px;font-weight:700;
-  padding:3px 10px;border-radius:4px;margin-bottom:14px;
-  letter-spacing:0.5px;
+  padding:4px 12px;border-radius:100px;margin-bottom:14px;
 }
-.case-tag.green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
-.case-tag.blue{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border);}
-.case-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;}
-.case-body{font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;}
-.case-result{
+.review-tag.featured{background:var(--white);color:var(--accent);border:1px solid var(--accent-border);}
+.review-tag.normal{background:#f3f4f6;color:var(--text-muted);}
+.review-body{font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;}
+.review-result{
   margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
   font-size:14px;font-weight:600;color:var(--accent);
 }
-.case-disclaimer{
-  text-align:center;font-size:12px;color:var(--text-muted);
-  margin-top:20px;
+.review-result.green{color:var(--green);}
+.review-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  max-width:600px;margin:0 auto;
 }
+.review-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;padding:24px 20px;text-align:left;
+}
+.review-disclaimer{
+  text-align:center;font-size:12px;color:var(--text-muted);
+  margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;
+}
+.mid-cta{text-align:center;margin-top:36px;}
 
 
 /* ===== 6. 비용 안내 ===== */
@@ -389,139 +471,16 @@ a{text-decoration:none;color:inherit;}
 }
 
 
-/* ===== QUIZ MODAL ===== */
-.quiz-overlay{
-  display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-  z-index:9999;background:rgba(0,0,0,0.5);
-  align-items:center;justify-content:center;
-}
-.quiz-overlay.open{display:flex;}
-.quiz-overlay.open .quiz-modal{animation:modalIn 0.25s ease;}
-@keyframes modalIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
-.quiz-modal{
-  background:var(--white);border-radius:20px;
-  max-width:480px;width:92%;max-height:90vh;overflow-y:auto;
-  padding:36px 28px;position:relative;
-}
-.quiz-close{
-  position:absolute;top:16px;right:16px;
-  width:32px;height:32px;border-radius:50%;
-  border:none;background:var(--bg);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;color:var(--text-muted);transition:all 0.15s;
-}
-.quiz-close:hover{background:var(--border);color:var(--text);}
-.quiz-progress{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:8px;
-}
-.quiz-progress-text{font-size:13px;font-weight:600;color:var(--text-sub);}
-.quiz-progress-circle{width:40px;height:40px;position:relative;}
-.quiz-progress-circle svg{transform:rotate(-90deg);}
-.quiz-progress-circle .track{fill:none;stroke:var(--border);stroke-width:3;}
-.quiz-progress-circle .fill{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset 0.4s;}
-.quiz-bar{
-  width:100%;height:4px;background:var(--border);border-radius:2px;
-  margin-bottom:32px;overflow:hidden;
-}
-.quiz-bar-fill{
-  height:100%;background:var(--accent);border-radius:2px;
-  transition:width 0.4s ease;
-}
-.quiz-step{display:none;animation:quizFadeIn 0.35s ease;}
-.quiz-step.active{display:block;}
-@keyframes quizFadeIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
-.quiz-question{
-  font-size:20px;font-weight:700;color:var(--text);
-  margin-bottom:24px;text-align:left;line-height:1.4;
-}
-.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
-.quiz-option{
-  display:flex;align-items:center;gap:12px;
-  padding:16px 18px;border:1.5px solid var(--border);border-radius:12px;
-  background:var(--white);cursor:pointer;transition:all 0.15s;
-  text-align:left;font-size:15px;color:var(--text);
-}
-.quiz-option:hover{border-color:var(--accent-border);background:var(--accent-light);}
-.quiz-option.selected{border-color:var(--accent);background:var(--accent-light);}
-.quiz-option .qo-icon{font-size:20px;flex-shrink:0;}
-.quiz-option .qo-check{
-  width:20px;height:20px;border-radius:50%;
-  border:2px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-left:auto;transition:all 0.15s;
-}
-.quiz-option.selected .qo-check{border-color:var(--accent);background:var(--accent);}
-.quiz-option.selected .qo-check::after{
-  content:'';display:block;width:6px;height:6px;border-radius:50%;background:#fff;
-}
-.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
-.quiz-back{
-  font-size:14px;font-weight:600;color:var(--text-muted);
-  background:none;border:none;cursor:pointer;padding:8px 0;font-family:inherit;
-  display:flex;align-items:center;gap:4px;
-}
-.quiz-back:hover{color:var(--text-sub);}
-.quiz-back.hidden{visibility:hidden;}
-.quiz-next{
-  padding:12px 28px;font-size:15px;font-weight:600;
-  background:var(--accent);color:#fff;border:none;border-radius:10px;
-  cursor:pointer;font-family:inherit;transition:all 0.2s;
-  opacity:0.5;pointer-events:none;
-}
-.quiz-next.enabled{opacity:1;pointer-events:auto;}
-.quiz-next:hover{background:var(--accent-hover);}
-.quiz-form-group{margin-bottom:16px;text-align:left;}
-.quiz-form-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block;}
-.quiz-form-input{
-  width:100%;padding:14px 16px;font-size:15px;
-  border:1.5px solid var(--border);border-radius:10px;
-  font-family:inherit;color:var(--text);
-  transition:border-color 0.15s;background:var(--white);
-}
-.quiz-form-input:focus{outline:none;border-color:var(--accent);}
-.quiz-check{display:flex;align-items:flex-start;gap:8px;margin-bottom:20px;text-align:left;}
-.quiz-check input{margin-top:3px;accent-color:var(--accent);}
-.quiz-check label{font-size:13px;color:var(--text-sub);line-height:1.4;}
-.quiz-check a{color:var(--accent);text-decoration:underline;cursor:pointer;}
-.quiz-privacy{
-  display:none;background:var(--bg);border-radius:10px;padding:16px;
-  margin:-12px 0 16px;text-align:left;font-size:13px;color:var(--text-sub);line-height:1.6;
-}
-.quiz-privacy.open{display:block;}
-.quiz-privacy table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:13px;}
-.quiz-privacy th,.quiz-privacy td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
-.quiz-privacy th{background:var(--white);font-weight:600;color:var(--text);white-space:nowrap;width:28%;}
-.quiz-submit{
-  width:100%;padding:16px;font-size:16px;font-weight:600;
-  background:var(--accent);color:#fff;border:none;border-radius:12px;
-  cursor:pointer;transition:all 0.2s;font-family:inherit;
-  box-shadow:0 4px 18px rgba(99,102,241,0.28);
-}
-.quiz-submit:hover{background:var(--accent-hover);transform:translateY(-1px);}
-.quiz-note{
-  font-size:12px;color:var(--text-muted);margin-top:14px;
-  display:flex;align-items:center;justify-content:center;gap:4px;
-}
-.btn-kakao{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:14px;font-size:15px;font-weight:600;
-  background:#FEE500;color:#000;border:none;border-radius:12px;
-  cursor:pointer;font-family:inherit;margin-top:12px;transition:all 0.15s;
-}
-.btn-kakao:hover{background:#f5dc00;}
-
-
 /* ===== RESPONSIVE ===== */
 @media(max-width:640px){
   .inner{padding:0 20px;}
   .sec-white,.sec-gray,.sec-dark{padding:60px 0;}
+  .quiz-section{padding:60px 0;}
   .hero{padding:48px 0 0;}
   .hp-val,.hp-free{font-size:28px;}
   .hp-val .hp-suffix{font-size:15px;}
   .hero-proof-inner{gap:16px;}
   .hero-proof{padding:28px 16px;}
-  .sit-grid{grid-template-columns:1fr;}
   .compare-grid{flex-direction:column;align-items:stretch;}
   .cmp-card.weak,.cmp-card.strong{flex:1;width:100%;}
   .cta-row{flex-direction:column;align-items:center;}
@@ -529,7 +488,9 @@ a{text-decoration:none;color:inherit;}
   .lawyer-card{padding:28px 20px;}
   .price-step{flex-direction:column;gap:10px;}
   .ps-num{width:28px;height:28px;font-size:12px;}
-  .quiz-modal{max-width:100%;height:100%;border-radius:0;max-height:100%;}
+  .review-grid{grid-template-columns:1fr;}
+  .quiz-container{border-radius:12px;padding:28px 16px;}
+  .quiz-option{min-height:48px;}
 }
 </style>
 </head>
@@ -539,7 +500,7 @@ a{text-decoration:none;color:inherit;}
 <nav class="nav">
   <div class="inner">
     <div class="nav-logo"><span class="dot"></span>유앤파트너스</div>
-    <span class="nav-cta" onclick="openQuiz()">무료 상황확인</span>
+    <a href="#quiz-section" class="nav-cta">무료 상황확인</a>
   </div>
 </nav>
 
@@ -558,10 +519,10 @@ a{text-decoration:none;color:inherit;}
       소명서 대필이 아닌, 법적 강제력으로 해결합니다.
     </p>
     <div class="cta-row">
-      <button class="btn-primary" onclick="openQuiz()">
+      <a href="#quiz-section" class="btn-primary">
         <svg viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         무료 상황확인 신청
-      </button>
+      </a>
       <a href="#pricing-section" class="btn-secondary">비용 먼저 확인하기</a>
     </div>
     <p class="btn-sub">변호사가 직접 전화합니다 · 영업시간 내 2시간 이내</p>
@@ -592,42 +553,149 @@ a{text-decoration:none;color:inherit;}
 </section>
 
 
-<!-- ===== 2. 이런 상황이라면 ===== -->
-<section class="sec-white situations">
+<!-- ===== 2. QUIZ SECTION (inline) ===== -->
+<section class="quiz-section" id="quiz-section">
   <div class="inner">
     <div class="sec-label">YOUR SITUATION</div>
-    <h2 class="sec-title">지금 겪고 있는 상황을<br>선택하세요.</h2>
-    <p class="sec-sub">해당되는 항목이 있다면, 변호사가 도울 수 있습니다.</p>
+    <h2 class="sec-title">내 상황, 1분이면 확인됩니다.</h2>
+    <p class="sec-sub">간단한 질문 4개에 답하면, 맞춤 분석 결과를 바로 확인할 수 있습니다.</p>
 
-    <div class="sit-grid">
-      <div class="sit-card">
-        <div class="sit-icon">🚫</div>
-        <div class="sit-title">가품 의심 정지</div>
-        <div class="sit-desc">정품인데 가품 판정. 소명도 안 먹힌다.</div>
-      </div>
-      <div class="sit-card">
-        <div class="sit-icon">⚖️</div>
-        <div class="sit-title">지재권 침해 정지</div>
-        <div class="sit-desc">지재권 신고 한 방에 계정까지 날아갔다.</div>
-      </div>
-      <div class="sit-card">
-        <div class="sit-icon">🔗</div>
-        <div class="sit-title">연관계정 정지</div>
-        <div class="sit-desc">내 잘못도 아닌데 연쇄 정지. 억울하다.</div>
-      </div>
-      <div class="sit-card highlight">
-        <div class="sit-icon">💰</div>
-        <div class="sit-title">정산금 보류</div>
-        <div class="sit-desc">이미 판 돈인데 수천만원이 묶여 있다.</div>
-      </div>
-    </div>
+    <div class="quiz-container">
+      <div id="quiz">
+        <div class="quiz-progress">
+          <span class="quiz-progress-text" id="quiz-progress-text">4단계 중 1번째</span>
+        </div>
+        <div class="quiz-bar">
+          <div class="quiz-bar-fill" id="quiz-bar" style="width:25%"></div>
+        </div>
 
-    <div class="sit-highlight">
-      <p>계정 복구와 별개로,<br>묶인 정산금은 법적으로 돌려받을 수 있습니다.</p>
-    </div>
+        <!-- Q1: 플랫폼 -->
+        <div class="quiz-step active" data-step="1">
+          <div class="quiz-question">어떤 플랫폼인가요?</div>
+          <div class="quiz-options" data-name="platform">
+            <div class="quiz-option" data-value="쿠팡"><span>쿠팡</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="스마트스토어"><span>스마트스토어</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="11번가"><span>11번가</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="G마켓·옥션"><span>G마켓·옥션</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="기타"><span>기타</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav">
+            <button class="quiz-back hidden">← 이전</button>
+          </div>
+        </div>
 
-    <div class="mid-cta">
-      <button class="btn-primary" onclick="openQuiz()">내 상황 확인하기</button>
+        <!-- Q2: 정지 사유 (card-style with descriptions) -->
+        <div class="quiz-step" data-step="2">
+          <div class="quiz-question">정지 사유가 뭔가요?</div>
+          <div class="quiz-options" data-name="reason">
+            <div class="quiz-option" data-value="가품 의심">
+              <span class="qo-icon">🚫</span>
+              <span class="qo-text"><span class="qo-title">가품 의심</span><span class="qo-desc">정품인데 가품 판정. 소명도 안 먹힌다.</span></span>
+              <span class="qo-check"></span>
+            </div>
+            <div class="quiz-option" data-value="지재권 침해">
+              <span class="qo-icon">⚖️</span>
+              <span class="qo-text"><span class="qo-title">지재권 침해</span><span class="qo-desc">지재권 신고 한 방에 계정까지 날아갔다.</span></span>
+              <span class="qo-check"></span>
+            </div>
+            <div class="quiz-option" data-value="연관계정 정지">
+              <span class="qo-icon">🔗</span>
+              <span class="qo-text"><span class="qo-title">연관계정 정지</span><span class="qo-desc">내 잘못도 아닌데 연쇄 정지. 억울하다.</span></span>
+              <span class="qo-check"></span>
+            </div>
+            <div class="quiz-option" data-value="정산금 보류">
+              <span class="qo-icon">💰</span>
+              <span class="qo-text"><span class="qo-title">정산금 보류</span><span class="qo-desc">이미 판 돈인데 수천만원이 묶여 있다.</span></span>
+              <span class="qo-check"></span>
+            </div>
+            <div class="quiz-option" data-value="기타/잘 모르겠음">
+              <span class="qo-icon">❓</span>
+              <span class="qo-text"><span class="qo-title">기타/잘 모르겠음</span></span>
+              <span class="qo-check"></span>
+            </div>
+          </div>
+          <div class="quiz-nav">
+            <button class="quiz-back" onclick="quizPrev()">← 이전</button>
+          </div>
+        </div>
+
+        <!-- Q3: 정산금 -->
+        <div class="quiz-step" data-step="3">
+          <div class="quiz-question">묶인 정산금이 얼마 정도인가요?</div>
+          <div class="quiz-options" data-name="amount">
+            <div class="quiz-option" data-value="없음"><span>없음 (정산금 이슈 없음)</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="500만원 미만"><span>500만원 미만</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="500만원~3,000만원"><span>500만원 ~ 3,000만원</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="3,000만원~1억원"><span>3,000만원 ~ 1억원</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="1억원 이상"><span>1억원 이상</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav">
+            <button class="quiz-back" onclick="quizPrev()">← 이전</button>
+          </div>
+        </div>
+
+        <!-- Q4: 소명 경험 -->
+        <div class="quiz-step" data-step="4">
+          <div class="quiz-question">소명서를 제출해보셨나요?</div>
+          <div class="quiz-options" data-name="attempt">
+            <div class="quiz-option" data-value="아직 안 해봄"><span>아직 안 해봤음</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="직접 해봤는데 반려"><span>직접 해봤는데 반려됨</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="대행사 맡김"><span>대행사에 맡겨봤는데 안 됨</span><span class="qo-check"></span></div>
+            <div class="quiz-option" data-value="여러 번 반려"><span>여러 번 시도했지만 계속 반려</span><span class="qo-check"></span></div>
+          </div>
+          <div class="quiz-nav">
+            <button class="quiz-back" onclick="quizPrev()">← 이전</button>
+          </div>
+        </div>
+
+        <!-- 결과 화면 + 연락처 -->
+        <div class="quiz-step" data-step="result">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div style="width:56px;height:56px;border-radius:50%;background:#ecfdf5;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="font-size:22px;font-weight:700;color:var(--text);">확인했습니다.</div>
+          </div>
+
+          <div id="quiz-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
+            <div id="quiz-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
+            <div id="quiz-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
+            <div id="quiz-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+          </div>
+
+          <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
+
+          <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:left;">지금 바로 변호사와 통화하세요.</div>
+          <p style="font-size:14px;color:var(--text-sub);margin-bottom:20px;text-align:left;line-height:1.6;">입력하신 내용을 바탕으로, 변호사가 구체적인 대응 방법을 안내드립니다.</p>
+
+          <div class="quiz-form-group">
+            <label class="quiz-form-label">이름</label>
+            <input type="text" class="quiz-form-input" id="q-name" placeholder="홍길동">
+          </div>
+          <div class="quiz-form-group">
+            <label class="quiz-form-label">전화번호</label>
+            <input type="tel" class="quiz-form-input" id="q-phone" placeholder="010-0000-0000">
+          </div>
+
+          <div class="quiz-check">
+            <input type="checkbox" id="q-agree">
+            <label for="q-agree"><a onclick="document.getElementById('q-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
+          </div>
+          <div class="quiz-privacy" id="q-privacy">
+            <table>
+              <tr><th>수집 항목</th><td>성함, 전화번호</td></tr>
+              <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
+              <tr><th>보유 기간</th><td>상담 완료 후 3년 또는 동의 철회 시까지</td></tr>
+            </table>
+            <p style="margin:0;font-size:12px;color:var(--text-muted);">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
+          </div>
+
+          <button class="quiz-submit" onclick="quizSubmit()">무료 상황확인 신청하기</button>
+          <p class="quiz-note">🔒 입력하신 정보는 상담 목적으로만 사용됩니다</p>
+          <a href="#kakao" class="btn-kakao">💬 카카오톡으로 문의하기</a>
+          <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;line-height:1.5;">유환진 변호사 · 서울고법 재판연구원 출신 · 영업시간 내 2시간 이내 연락</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -693,7 +761,7 @@ a{text-decoration:none;color:inherit;}
     </div>
 
     <div class="mid-cta" style="margin-top:24px;">
-      <button class="btn-primary" onclick="openQuiz()">내 정산금 확인하기</button>
+      <a href="#quiz-section" class="btn-primary">내 정산금 확인하기</a>
     </div>
   </div>
 </section>
@@ -739,55 +807,65 @@ a{text-decoration:none;color:inherit;}
 </section>
 
 
-<!-- ===== 5. 해결 사례 ===== -->
-<section class="sec-gray cases">
+<!-- ===== 5. REVIEWS ===== -->
+<section class="sec-gray reviews">
   <div class="inner">
-    <div class="sec-label">CASES</div>
-    <h2 class="sec-title">이렇게 해결됩니다.</h2>
-    <p class="sec-sub">쿠팡·스마트스토어 등 주요 플랫폼 사례를 기반으로 구성했습니다.</p>
+    <div class="sec-label">REVIEWS</div>
+    <h2 class="sec-title">먼저 경험한 셀러들</h2>
 
-    <div class="case-list">
-      <div class="case-card">
-        <span class="case-tag green">반환 사례</span>
-        <div class="case-title">영구정지 후 묶인 정산금 2,400만원 — 반환 성공</div>
-        <div class="case-body">
-          계정이 영구정지된 후 정산 예정 금액이 전액 보류됐습니다.
-          플랫폼은 "약관 위반으로 지급 불가"라고 했으나,
-          이미 소비자가 구매를 확정한 매출채권은 약관 위반 여부와 별개로
-          정산 의무가 있다는 법적 논리로 반환을 이끌어냈습니다.
+    <!-- Featured card (full-width) -->
+    <div class="review-featured">
+      <span class="review-tag featured">쿠팡·11번가 · 해외구매대행 법인</span>
+      <div class="review-amount featured">₩1억 2,700만원 반환</div>
+      <div class="review-body">
+        통관 서류가 있는데도 가품으로 판정받아 3개 플랫폼 계정이 동시에 정지됐습니다. 정산금만 1억이 넘었는데, 변호사가 통관 기록과 정품 인증서를 법적으로 재구성해서 전액 돌려받았습니다.
+      </div>
+      <div class="review-result">✓ 정산금 전액 반환</div>
+    </div>
+
+    <!-- 2x2 grid -->
+    <div class="review-grid">
+      <div class="review-card">
+        <span class="review-tag normal">쿠팡 · 건강기능식품</span>
+        <div class="review-amount normal">₩2,400만원 반환</div>
+        <div class="review-body">
+          영구정지 받고 포기하려 했는데, 이미 확정된 매출은 법적으로 받을 수 있다고 해서 맡겼습니다.
         </div>
-        <div class="case-result">→ 정산금 전액 반환</div>
+        <div class="review-result">✓ 전액 반환 완료</div>
       </div>
 
-      <div class="case-card">
-        <span class="case-tag blue">복구 사례</span>
-        <div class="case-title">가품 의심 계정 정지 — 법률의견서 제출 후 복구</div>
-        <div class="case-body">
-          정품을 판매했으나 유통경로 소명이 부족해 계정이 정지됐습니다.
-          도매상이 증빙 서류 제공을 거부한 상황에서,
-          변호사가 유통경로 법적 소명 자료를 재구성하고
-          법률의견서를 첨부하여 플랫폼에 재제출한 결과 계정이 복구됐습니다.
+      <div class="review-card">
+        <span class="review-tag normal">스마트스토어 · 여성의류</span>
+        <div class="review-amount normal">₩8,000만원 반환</div>
+        <div class="review-body">
+          직원 급여도 못 줄 상황이었는데, 내용증명 하나로 2주 만에 정산금이 풀렸습니다.
         </div>
-        <div class="case-result">→ 계정 정지 해제</div>
+        <div class="review-result">✓ 전액 반환 완료</div>
       </div>
 
-      <div class="case-card">
-        <span class="case-tag blue">해제 사례</span>
-        <div class="case-title">1개 계정 문제로 3개 계정 연쇄 정지 — 분리 성공</div>
-        <div class="case-body">
-          지재권 위반으로 정지된 A계정 때문에 동일 장소에서 접속한
-          B, C 계정까지 연관정지됐습니다. 각 계정이 독립된 사업자이며
-          별도의 상품군을 취급하고 있음을 법적으로 소명하여
-          나머지 계정의 정지를 해제했습니다.
+      <div class="review-card">
+        <span class="review-tag normal">무신사 · 스니커즈</span>
+        <div class="review-amount green">계정 복구</div>
+        <div class="review-body">
+          가품 판정으로 계정이 날아갔는데, 법률의견서 붙이니까 법무팀 태도가 완전히 달라졌습니다.
         </div>
-        <div class="case-result">→ 연관계정 2개 정지 해제</div>
+        <div class="review-result green">✓ 계정 정지 해제</div>
+      </div>
+
+      <div class="review-card">
+        <span class="review-tag normal">쿠팡 · 생활용품 (3개 계정 운영)</span>
+        <div class="review-amount green">연관계정 2개 해제</div>
+        <div class="review-body">
+          1개 계정 문제로 나머지 2개까지 연쇄 정지됐는데, 각 계정이 독립 사업자임을 법적으로 소명해서 해제됐습니다.
+        </div>
+        <div class="review-result green">✓ 2개 계정 정지 해제</div>
       </div>
     </div>
 
-    <p class="case-disclaimer">실제 사례를 바탕으로 재구성했습니다. 모든 사건의 결과는 개별 상황에 따라 다릅니다.</p>
+    <p class="review-disclaimer">실제 의뢰인 후기를 바탕으로 재구성했습니다. 모든 사건의 결과는 개별 상황에 따라 다릅니다.</p>
 
     <div class="mid-cta">
-      <button class="btn-primary" onclick="openQuiz()">내 상황도 가능한지 확인하기</button>
+      <a href="#quiz-section" class="btn-primary">내 상황도 가능한지 확인하기</a>
     </div>
   </div>
 </section>
@@ -840,7 +918,7 @@ a{text-decoration:none;color:inherit;}
     </div>
 
     <div class="mid-cta">
-      <button class="btn-primary" onclick="openQuiz()">무료 상황확인 신청하기</button>
+      <a href="#quiz-section" class="btn-primary">무료 상황확인 신청하기</a>
     </div>
   </div>
 </section>
@@ -908,7 +986,7 @@ a{text-decoration:none;color:inherit;}
       정산금 반환은 어려워집니다.
     </h2>
     <p class="sec-sub">지금 번호 남기면 시작할 수 있습니다.</p>
-    <button class="btn-primary" onclick="openQuiz()">상담 신청하고 연락받기</button>
+    <a href="#quiz-section" class="btn-primary">상담 신청하고 연락받기</a>
     <p class="btn-sub">영업시간 내 2시간 이내 연락드립니다</p>
 
     <div class="closing-brand">
@@ -918,169 +996,21 @@ a{text-decoration:none;color:inherit;}
 </section>
 
 
-<!-- ===== QUIZ MODAL ===== -->
-<div class="quiz-overlay" id="quiz-overlay" onclick="if(event.target===this)closeQuiz();">
-  <div class="quiz-modal">
-    <button class="quiz-close" onclick="closeQuiz()">✕</button>
-
-    <div id="quiz">
-      <div class="quiz-progress">
-        <span class="quiz-progress-text" id="quiz-progress-text">4단계 중 1번째</span>
-        <div class="quiz-progress-circle">
-          <svg width="40" height="40" viewBox="0 0 40 40">
-            <circle class="track" cx="20" cy="20" r="17"/>
-            <circle class="fill" id="quiz-circle" cx="20" cy="20" r="17" stroke-dasharray="106.8" stroke-dashoffset="80.1"/>
-          </svg>
-        </div>
-      </div>
-      <div class="quiz-bar">
-        <div class="quiz-bar-fill" id="quiz-bar" style="width:25%"></div>
-      </div>
-
-      <!-- Q1: 플랫폼 -->
-      <div class="quiz-step active" data-step="1">
-        <div class="quiz-question">어떤 플랫폼인가요?</div>
-        <div class="quiz-options" data-name="platform">
-          <div class="quiz-option" data-value="쿠팡"><span class="qo-icon">🟠</span><span>쿠팡</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="스마트스토어"><span class="qo-icon">🟢</span><span>스마트스토어</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="11번가"><span class="qo-icon">🔴</span><span>11번가</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="G마켓·옥션"><span class="qo-icon">🟡</span><span>G마켓·옥션</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="기타"><span class="qo-icon">📦</span><span>기타</span><span class="qo-check"></span></div>
-        </div>
-        <div class="quiz-nav">
-          <button class="quiz-back hidden">← 이전</button>
-          <button class="quiz-next" onclick="quizNext()">다음</button>
-        </div>
-      </div>
-
-      <!-- Q2: 정지 사유 -->
-      <div class="quiz-step" data-step="2">
-        <div class="quiz-question">정지 사유가 뭔가요?</div>
-        <div class="quiz-options" data-name="reason">
-          <div class="quiz-option" data-value="가품 의심"><span class="qo-icon">🚫</span><span>가품 의심</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="지재권 침해"><span class="qo-icon">⚖️</span><span>지재권 침해 (상표권·저작권)</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="연관계정 정지"><span class="qo-icon">🔗</span><span>연관계정 정지</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="정책 위반"><span class="qo-icon">📋</span><span>정책 위반 (키워드·카테고리 등)</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="잘 모르겠음"><span class="qo-icon">❓</span><span>잘 모르겠음</span><span class="qo-check"></span></div>
-        </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-          <button class="quiz-next" onclick="quizNext()">다음</button>
-        </div>
-      </div>
-
-      <!-- Q3: 정산금 -->
-      <div class="quiz-step" data-step="3">
-        <div class="quiz-question">묶인 정산금이 얼마 정도인가요?</div>
-        <div class="quiz-options" data-name="amount">
-          <div class="quiz-option" data-value="없음"><span class="qo-icon">✅</span><span>없음 (정산금 이슈 없음)</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="500만원 미만"><span class="qo-icon">💵</span><span>500만원 미만</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="500만원~3,000만원"><span class="qo-icon">💰</span><span>500만원 ~ 3,000만원</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="3,000만원~1억원"><span class="qo-icon">🏦</span><span>3,000만원 ~ 1억원</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="1억원 이상"><span class="qo-icon">🏛️</span><span>1억원 이상</span><span class="qo-check"></span></div>
-        </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-          <button class="quiz-next" onclick="quizNext()">다음</button>
-        </div>
-      </div>
-
-      <!-- Q4: 소명 경험 -->
-      <div class="quiz-step" data-step="4">
-        <div class="quiz-question">소명서를 제출해보셨나요?</div>
-        <div class="quiz-options" data-name="attempt">
-          <div class="quiz-option" data-value="아직 안 해봄"><span class="qo-icon">🆕</span><span>아직 안 해봤음</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="직접 해봤는데 반려"><span class="qo-icon">📝</span><span>직접 해봤는데 반려됨</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="대행사 맡김"><span class="qo-icon">🏢</span><span>대행사에 맡겨봤는데 안 됨</span><span class="qo-check"></span></div>
-          <div class="quiz-option" data-value="여러 번 반려"><span class="qo-icon">🔄</span><span>여러 번 시도했지만 계속 반려</span><span class="qo-check"></span></div>
-        </div>
-        <div class="quiz-nav">
-          <button class="quiz-back" onclick="quizPrev()">← 이전</button>
-          <button class="quiz-next" onclick="quizShowResult()">다음</button>
-        </div>
-      </div>
-
-      <!-- 결과 화면 + 연락처 -->
-      <div class="quiz-step" data-step="result">
-        <div style="text-align:center;margin-bottom:24px;">
-          <div style="width:56px;height:56px;border-radius:50%;background:#ecfdf5;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;">
-            <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#059669"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div style="font-size:22px;font-weight:700;color:var(--text);">확인했습니다.</div>
-        </div>
-
-        <div id="quiz-result-card" style="background:var(--accent-light);border-radius:16px;padding:24px;margin-bottom:20px;text-align:left;">
-          <div id="quiz-result-title" style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.4;"></div>
-          <div id="quiz-result-body" style="font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;margin-bottom:16px;"></div>
-          <div id="quiz-result-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
-
-        <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;text-align:left;">지금 바로 변호사와 통화하세요.</div>
-        <p style="font-size:14px;color:var(--text-sub);margin-bottom:20px;text-align:left;line-height:1.6;">입력하신 내용을 바탕으로, 변호사가 구체적인 대응 방법을 안내드립니다.</p>
-
-        <div class="quiz-form-group">
-          <label class="quiz-form-label">이름</label>
-          <input type="text" class="quiz-form-input" id="q-name" placeholder="홍길동">
-        </div>
-        <div class="quiz-form-group">
-          <label class="quiz-form-label">전화번호</label>
-          <input type="tel" class="quiz-form-input" id="q-phone" placeholder="010-0000-0000">
-        </div>
-
-        <div class="quiz-check">
-          <input type="checkbox" id="q-agree">
-          <label for="q-agree"><a onclick="document.getElementById('q-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
-        </div>
-        <div class="quiz-privacy" id="q-privacy">
-          <table>
-            <tr><th>수집 항목</th><td>성함, 전화번호</td></tr>
-            <tr><th>수집 목적</th><td>법률 상담 신청 접수 및 변호사 콜백 연락</td></tr>
-            <tr><th>보유 기간</th><td>상담 완료 후 3년 또는 동의 철회 시까지</td></tr>
-          </table>
-          <p style="margin:0;font-size:12px;color:var(--text-muted);">동의를 거부할 수 있으나, 거부 시 상담 신청이 불가합니다.</p>
-        </div>
-
-        <button class="quiz-submit" onclick="quizSubmit()">무료 상황확인 신청하기</button>
-        <p class="quiz-note">🔒 입력하신 정보는 상담 목적으로만 사용됩니다</p>
-        <a href="#kakao" class="btn-kakao" onclick="closeQuiz();">💬 카카오톡으로 문의하기</a>
-        <p style="font-size:13px;color:var(--text-muted);margin-top:16px;text-align:center;line-height:1.5;">유환진 변호사 · 서울고법 재판연구원 출신 · 영업시간 내 2시간 이내 연락</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <!-- ===== SCRIPTS ===== -->
 <script>
-// Modal open/close
-function openQuiz(){
-  document.getElementById('quiz-overlay').classList.add('open');
-  document.body.classList.add('modal-open');
-}
-function closeQuiz(){
-  document.getElementById('quiz-overlay').classList.remove('open');
-  document.body.classList.remove('modal-open');
-}
-
-// Quiz logic
+// Quiz logic (inline, no modal)
 (function(){
   var current = 1;
   var questionSteps = 4;
   var answers = {};
-  var circumference = 2 * Math.PI * 17;
   var progressEl = document.getElementById('quiz-progress-text');
   var barEl = document.getElementById('quiz-bar');
-  var circleEl = document.getElementById('quiz-circle');
   var progressRow = document.querySelector('.quiz-progress');
   var barRow = document.querySelector('.quiz-bar');
 
   function updateProgress(){
     progressEl.textContent = '4단계 중 ' + current + '번째';
     barEl.style.width = (current / questionSteps * 100) + '%';
-    var offset = circumference - (current / questionSteps) * circumference;
-    circleEl.setAttribute('stroke-dashoffset', offset);
   }
 
   function showStep(n){
@@ -1095,38 +1025,37 @@ function closeQuiz(){
       progressRow.style.display = '';
       barRow.style.display = '';
       updateProgress();
-      updateNextBtn();
     }
-    // Scroll modal to top
-    document.querySelector('.quiz-modal').scrollTop = 0;
+    // Scroll quiz container into view
+    var container = document.querySelector('.quiz-container');
+    if(container) container.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 
-  function updateNextBtn(){
-    var step = document.querySelector('.quiz-step[data-step="' + current + '"]');
-    if(!step) return;
-    var btn = step.querySelector('.quiz-next');
-    if(!btn) return;
-    var selected = step.querySelector('.quiz-option.selected');
-    btn.classList.toggle('enabled', !!selected);
-  }
-
+  // Auto-advance on option click
   document.querySelectorAll('.quiz-option').forEach(function(opt){
     opt.addEventListener('click', function(){
       var parent = this.closest('.quiz-options');
       parent.querySelectorAll('.quiz-option').forEach(function(o){ o.classList.remove('selected'); });
       this.classList.add('selected');
       answers[parent.getAttribute('data-name')] = this.getAttribute('data-value');
-      updateNextBtn();
+
+      // Determine which step this option belongs to
+      var stepEl = this.closest('.quiz-step');
+      var stepNum = stepEl.getAttribute('data-step');
+
+      // Auto-advance after 0.3s delay
+      if(stepNum !== 'result'){
+        setTimeout(function(){
+          if(parseInt(stepNum) < questionSteps){
+            current = parseInt(stepNum) + 1;
+            showStep(current);
+          } else if(parseInt(stepNum) === questionSteps){
+            quizShowResult();
+          }
+        }, 300);
+      }
     });
   });
-
-  window.quizNext = function(){
-    if(current >= questionSteps) return;
-    var step = document.querySelector('.quiz-step[data-step="' + current + '"]');
-    if(!step.querySelector('.quiz-option.selected')) return;
-    current++;
-    showStep(current);
-  };
 
   window.quizPrev = function(){
     if(current <= 1) return;
