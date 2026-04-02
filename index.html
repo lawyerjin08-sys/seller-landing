@@ -584,6 +584,8 @@ a{text-decoration:none;color:inherit;}
   .float-kakao{bottom:16px;right:16px;}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("I2i588ZHaaUSH_jQA");</script>
 </head>
 <body>
 
@@ -1338,28 +1340,22 @@ function createQuizEngine(prefix){
       // 결과 제목 가져오기
       var resultTitle = (document.getElementById(prefix + '-result-title') || {}).textContent || '';
 
-      // Google Sheets 전송
-      // ※ 여기에 Google Apps Script 웹앱 URL을 넣으세요
-      var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwVF7tAKPaitQn4_ZcLeg79RXZg_4sHlHfZXLnFf-JPzBjXvyg4_OHVoJyLMV78qUQQfA/exec';
-      if(SHEET_URL){
-        fetch(SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            timestamp: new Date().toISOString(),
-            platform: answers.platform || '',
-            reason: answers.reason || '',
-            amount: answers.amount || '',
-            experience: answers.attempt || '',
-            name: name,
-            phone: phone,
-            result: resultTitle
-          })
-        }).finally(function(){ showComplete(); });
-      } else {
+      // EmailJS 전송
+      emailjs.send("service_myseller", "template_jhnbbha", {
+        platform: answers.platform || '',
+        reason: answers.reason || '',
+        amount: answers.amount || '',
+        experience: answers.attempt || '',
+        name: name,
+        phone: phone,
+        result: resultTitle,
+        timestamp: new Date().toLocaleString('ko-KR')
+      }).then(function() {
         showComplete();
-      }
+      }).catch(function(error) {
+        console.error('EmailJS error:', error);
+        showComplete();
+      });
 
       function showComplete(){
         root.innerHTML =
