@@ -473,34 +473,18 @@ a{text-decoration:none;color:inherit;}
 
 /* ===== 7. 월정액 ===== */
 .retainer{text-align:center;}
-.retainer-card{
-  max-width:480px;margin:0 auto;
-  background:linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-  border:2px solid var(--accent-border);
-  border-radius:16px;padding:32px 28px;text-align:left;
+.ret-price-big{font-size:28px;font-weight:800;color:var(--accent);margin-bottom:4px;}
+.ret-price-sub{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
+.ret-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  max-width:520px;margin:0 auto;
 }
-.ret-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;}
-.ret-price{font-size:15px;font-weight:600;color:var(--accent);margin-bottom:16px;}
-.ret-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.ret-list li{
-  font-size:14px;color:var(--text-sub);line-height:1.5;
-  padding-left:20px;position:relative;
+.ret-mini{
+  background:var(--white);border-radius:12px;padding:20px;
+  border:1px solid var(--border);text-align:left;
 }
-.ret-list li::before{
-  content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700;font-size:13px;
-}
-.ret-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent);color:#fff;
-  font-size:15px;font-weight:600;padding:14px 32px;
-  border-radius:12px;border:none;cursor:pointer;
-  transition:all 0.2s;box-shadow:0 4px 18px rgba(99,102,241,0.28);
-  margin-top:20px;
-}
-.ret-cta:hover{
-  background:var(--accent-hover);transform:translateY(-2px);
-  box-shadow:0 6px 28px rgba(99,102,241,0.38);
-}
+.ret-mini-label{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px;}
+.ret-mini-text{font-size:14px;font-weight:500;color:var(--text);line-height:1.5;}
 
 
 /* ===== 8. FAQ ===== */
@@ -562,6 +546,7 @@ a{text-decoration:none;color:inherit;}
   .lawyer-card{padding:28px 20px;}
   .lawyer-photo{width:160px;}
   .pr-card-main,.pr-card-sub{padding:24px 20px;}
+  .ret-grid{grid-template-columns:1fr;}
   .review-grid{grid-template-columns:1fr;}
   .quiz-container{border-radius:12px;padding:28px 16px;}
   .quiz-modal{
@@ -1081,18 +1066,36 @@ a{text-decoration:none;color:inherit;}
 
 
 <!-- ===== 7. 월정액 자문 ===== -->
-<section class="sec-white retainer" style="padding-top:0;">
+<section class="sec-gray retainer">
   <div class="inner">
-    <div class="retainer-card">
-      <div class="ret-title">다시 멈추지 않기 위한 법률 파트너</div>
-      <div class="ret-price">월 55만원 · 계약 기간 없음 · 언제든 해지</div>
-      <ul class="ret-list">
-        <li>상품 올리기 전에 정지 리스크를 미리 잡아드립니다</li>
-        <li>정책이 바뀌면 즉시 알려드리고 대응 방법을 안내합니다</li>
-        <li>악성 리뷰, 허위 클레임에 변호사가 직접 대응합니다</li>
-        <li>계약서 한 줄이 수천만원을 지킵니다</li>
-      </ul>
-      <button onclick="openQuizModal()" class="ret-cta">월정액 상담 신청</button>
+    <div class="sec-label">MONTHLY PLAN</div>
+    <h2 class="sec-title">다시 멈추지 않기 위한 법률 파트너</h2>
+    <p class="sec-sub">한 번 정지되면 아는 거잖아요. 다음엔 미리 막아야 합니다.</p>
+
+    <div class="ret-price-big">월 55만원</div>
+    <div class="ret-price-sub">계약 기간 없음 · 언제든 해지</div>
+
+    <div class="ret-grid">
+      <div class="ret-mini">
+        <div class="ret-mini-label">지재권 지뢰</div>
+        <div class="ret-mini-text">상품 올리기 전에 정지 리스크를 잡아드립니다</div>
+      </div>
+      <div class="ret-mini">
+        <div class="ret-mini-label">정책 변경</div>
+        <div class="ret-mini-text">바뀌는 즉시 알려드리고 대응합니다</div>
+      </div>
+      <div class="ret-mini">
+        <div class="ret-mini-label">악성 클레임</div>
+        <div class="ret-mini-text">변호사가 직접 대응합니다</div>
+      </div>
+      <div class="ret-mini">
+        <div class="ret-mini-label">계약서 구멍</div>
+        <div class="ret-mini-text">한 줄이 수천만원을 지킵니다</div>
+      </div>
+    </div>
+
+    <div class="mid-cta" style="margin-top:28px;">
+      <button onclick="openRetainerModal()" class="btn-primary">월정액 자문 상담하기</button>
     </div>
   </div>
 </section>
@@ -1156,9 +1159,18 @@ a{text-decoration:none;color:inherit;}
 <!-- ===== SCRIPTS ===== -->
 <script>
 // Quiz Modal open/close
+var _retainerMode = false;
 function openQuizModal(){
+  _retainerMode = false;
   document.getElementById('quiz-overlay').classList.add('open');
   document.body.classList.add('modal-open');
+}
+function openRetainerModal(){
+  _retainerMode = true;
+  document.getElementById('quiz-overlay').classList.add('open');
+  document.body.classList.add('modal-open');
+  // Skip quiz, go straight to retainer result
+  modalQuiz.showRetainerResult();
 }
 function closeQuizModal(){
   document.getElementById('quiz-overlay').classList.remove('open');
@@ -1271,6 +1283,18 @@ function createQuizEngine(prefix){
         tag.textContent = v;
         tagsEl.appendChild(tag);
       });
+      showStep('result');
+    },
+    showRetainerResult: function(){
+      document.getElementById(prefix + '-result-title').textContent = '월정액 자문이 필요하시군요.';
+      document.getElementById(prefix + '-result-body').textContent = '현재 운영 상황을 파악한 후, 맞춤형 자문 범위를 안내드립니다.';
+      var tagsEl = document.getElementById(prefix + '-result-tags');
+      tagsEl.innerHTML = '';
+      var tag = document.createElement('span');
+      tag.style.cssText = 'display:inline-block;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--accent);border:1px solid var(--accent-border);';
+      tag.textContent = '월정액 자문 문의';
+      tagsEl.appendChild(tag);
+      answers.reason = '월정액 자문 문의';
       showStep('result');
     },
     submit: function(){
