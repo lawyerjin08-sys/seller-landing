@@ -384,17 +384,8 @@ a{text-decoration:none;color:inherit;}
   font-size:17px;font-weight:600;color:var(--text);
   line-height:1.5;margin:16px 0;word-break:keep-all;
 }
-.review-body{font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;}
+.review-body{font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;text-align:justify;}
 .review-body strong{color:var(--text);font-weight:600;}
-.review-body-collapsible{
-  display:none;overflow:hidden;
-}
-.review-body-collapsible.open{display:block;}
-.review-toggle{
-  font-size:13px;color:var(--accent);font-weight:500;
-  cursor:pointer;margin-top:8px;display:inline-block;
-}
-.review-toggle:hover{text-decoration:underline;}
 .review-result{
   margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
   font-size:14px;font-weight:600;color:var(--accent);
@@ -414,10 +405,6 @@ a{text-decoration:none;color:inherit;}
   box-shadow:0 8px 24px rgba(0,0,0,0.1);
 }
 .review-card.green-bar{border-left:4px solid #059669;}
-.review-sub-heading{
-  font-size:20px;font-weight:700;color:var(--text);
-  text-align:center;margin-top:40px;margin-bottom:24px;
-}
 .reviews-more-section{display:none;}
 .reviews-more-section.open{display:block;}
 .review-more-toggle{
@@ -708,7 +695,7 @@ a{text-decoration:none;color:inherit;}
       <em>변호사가 직접 대응합니다.</em>
     </h1>
     <p class="desc">
-      계정 복구부터 묶인 정산금 반환까지.<br>
+      <strong style="color:var(--accent);font-weight:700;">계정 복구부터 묶인 정산금 반환까지.</strong><br>
       소명서로 안 되는 문제, 변호사가 법적으로 풀어드립니다.
     </p>
     <div class="cta-row">
@@ -952,7 +939,7 @@ a{text-decoration:none;color:inherit;}
     <div class="sec-label">REVIEWS</div>
     <h2 class="sec-title">먼저 경험한 셀러들</h2>
 
-    <!-- 피처드: 1억 2,700만원 (항상 본문 표시) -->
+    <!-- 피처드: 1억 2,700만원 -->
     <div class="review-featured">
       <span class="review-tag featured">쿠팡·11번가 · 해외구매대행 법인</span>
       <div class="review-amount featured">1억 2,700만원 반환</div>
@@ -963,32 +950,26 @@ a{text-decoration:none;color:inherit;}
       <div class="review-result">✓ 정산금 전액 반환</div>
     </div>
 
-    <!-- 정산금 후기 2x1 -->
+    <!-- 초기 노출: 2,400만원 + 계정 복구 -->
     <div class="review-grid">
       <div class="review-card">
         <span class="review-tag normal">쿠팡 · 건강기능식품</span>
         <div class="review-amount normal">2,400만원 반환</div>
         <div class="review-impact">"'이게 원래 내 돈이 맞구나' 처음으로 그렇게 느꼈습니다."</div>
-        <div class="review-body-collapsible">
-          <div class="review-body">
-            솔직히 돈은 포기하고 있었습니다. 영구정지 통보받고 나서 고객센터에 수십 번 전화했는데 <strong>매번 '약관 위반이라 정산 불가'만 반복</strong>하더라고요. 변호사님이 <strong>'구매확정 된 매출채권은 계정 정지랑 별개로 받을 수 있다'</strong>고 하셔서 처음으로 '아, 이게 원래 내 돈이 맞구나' 싶었습니다. <strong>한 달 만에 전액 돌려받았어요.</strong> 혼자 했으면 절대 못 받았을 돈입니다.
-          </div>
+        <div class="review-body">
+          영구정지 통보받고 고객센터에 수십 번 전화했는데 <strong>매번 '약관 위반이라 정산 불가'만 반복</strong>하더라고요. 변호사님이 <strong>'구매확정 된 매출채권은 계정 정지랑 별개로 받을 수 있다'</strong>고 하셔서, <strong>한 달 만에 전액 돌려받았어요.</strong>
         </div>
-        <span class="review-toggle" onclick="toggleReview(this)">자세히 보기 ▼</span>
         <div class="review-result">✓ 전액 반환 완료</div>
       </div>
 
-      <div class="review-card">
-        <span class="review-tag normal">스마트스토어 · 여성의류</span>
-        <div class="review-amount normal">8,000만원 반환</div>
-        <div class="review-impact">"이 돈 못 받았으면 사업 접어야 했을 수도 있어요."</div>
-        <div class="review-body-collapsible">
-          <div class="review-body">
-            직원 급여도 줘야 하고 시즌 물량 대금도 밀려 있는데 <strong>8,000만원이 잠겨버렸어요.</strong> 진짜 눈앞이 깜깜했습니다. 변호사님이 '구매확정 완료된 금액을 플랫폼이 일방적으로 보류하는 건 법적으로 다툴 수 있다'고 하셨고, <strong>법률의견서 들어가고 나서 흐름이 바뀌었습니다.</strong> <strong>이 돈 못 받았으면 사업 접어야 했을 수도</strong> 있어요.
-          </div>
+      <div class="review-card green-bar">
+        <span class="review-tag normal">무신사 · 스니커즈</span>
+        <div class="review-amount green">계정 복구</div>
+        <div class="review-impact">"반신반의했는데 진짜 복구됐어요."</div>
+        <div class="review-body">
+          정품만 취급하는데 가품 판정. <strong>도매처에 서류 요청했더니 안 줍니다.</strong> 변호사님이 유통경로 소명 자료를 법적으로 재구성해서 <strong>법률의견서랑 같이 넣어주셨는데, 진짜 복구됐어요.</strong>
         </div>
-        <span class="review-toggle" onclick="toggleReview(this)">자세히 보기 ▼</span>
-        <div class="review-result">✓ 전액 반환 완료</div>
+        <div class="review-result green">✓ 계정 정지 해제</div>
       </div>
     </div>
 
@@ -997,34 +978,26 @@ a{text-decoration:none;color:inherit;}
       <span class="review-more-toggle" id="reviews-more-btn" onclick="toggleMoreReviews()">후기 더 보기 ▼</span>
     </div>
 
-    <!-- 계정 복구 섹션 (초기 숨김) -->
+    <!-- 펼치면 나오는 카드: 8,000만원 + 연관계정 -->
     <div class="reviews-more-section" id="reviews-more-section">
-      <div class="review-sub-heading">계정 복구도 합니다.</div>
-
       <div class="review-grid">
-        <div class="review-card green-bar">
-          <span class="review-tag normal">무신사 · 스니커즈</span>
-          <div class="review-amount green">계정 복구</div>
-          <div class="review-impact">"반신반의했는데 진짜 복구됐어요."</div>
-          <div class="review-body-collapsible">
-            <div class="review-body">
-              가품 아닌데 가품으로 찍혔습니다ㅋㅋ 정품만 취급하는데 유통경로 소명하라고 해서 <strong>도매처에 서류 요청했더니 그쪽에서 안 줍니다.</strong> 완전 막혀버린 거죠. 변호사님이 유통경로 소명 자료를 법적으로 재구성해서 <strong>법률의견서랑 같이 넣어주셨는데, 반신반의했는데 진짜 복구됐어요.</strong> 셀러가 혼자서 법률의견서를 쓸 수는 없잖아요.
-            </div>
+        <div class="review-card">
+          <span class="review-tag normal">스마트스토어 · 여성의류</span>
+          <div class="review-amount normal">8,000만원 반환</div>
+          <div class="review-impact">"이 돈 못 받았으면 사업 접어야 했을 수도 있어요."</div>
+          <div class="review-body">
+            직원 급여도, 시즌 물량 대금도 밀려 있는데 <strong>8,000만원이 잠겨버렸어요.</strong> 변호사님이 <strong>법률의견서 들어가고 나서 흐름이 바뀌었고,</strong> 전액 반환받았습니다. <strong>이 돈 못 받았으면 사업 접어야 했을 수도</strong> 있어요.
           </div>
-          <span class="review-toggle" onclick="toggleReview(this)">자세히 보기 ▼</span>
-          <div class="review-result green">✓ 계정 정지 해제</div>
+          <div class="review-result">✓ 전액 반환 완료</div>
         </div>
 
         <div class="review-card green-bar">
           <span class="review-tag normal">쿠팡 · 생활용품 (3개 계정 운영)</span>
           <div class="review-amount green">연관계정 2개 해제</div>
           <div class="review-impact">"혼자 이의 제기해봤자 안 됩니다."</div>
-          <div class="review-body-collapsible">
-            <div class="review-body">
-              A계정 하나가 지재권 문제로 정지됐는데 같은 사무실에서 접속했다는 이유로 B, C 계정까지 연쇄로 정지당했어요. 세 개 다 각각 다른 사업자등록증이고 파는 물건도 완전 다른데 그냥 <strong>IP가 같다는 이유로 다 묶어버렸어요.</strong> 너무 억울해서 이의 제기했는데 기계적으로 반려. <strong>변호사님이 법적으로 정리해서 제출하니까 두 개 다 풀렸습니다.</strong> 혼자 이의 제기해봤자 안 됩니다.
-            </div>
+          <div class="review-body">
+            세 개 다 각각 다른 사업자등록증인데 <strong>IP가 같다는 이유로 다 묶어버렸어요.</strong> 이의 제기해봤자 기계적으로 반려. <strong>변호사님이 법적으로 정리해서 제출하니까 두 개 다 풀렸습니다.</strong>
           </div>
-          <span class="review-toggle" onclick="toggleReview(this)">자세히 보기 ▼</span>
           <div class="review-result green">✓ 2개 계정 정지 해제</div>
         </div>
       </div>
@@ -1401,18 +1374,6 @@ var modalQuiz = createQuizEngine('modal');
   }, {threshold: 0.15});
   items.forEach(function(item){ observer.observe(item); });
 })();
-
-// Review body toggle
-function toggleReview(el){
-  var body = el.previousElementSibling;
-  if(body.classList.contains('open')){
-    body.classList.remove('open');
-    el.textContent = '자세히 보기 ▼';
-  } else {
-    body.classList.add('open');
-    el.textContent = '접기 ▲';
-  }
-}
 
 // Review more section toggle
 function toggleMoreReviews(){
