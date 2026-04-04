@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- pillar -->
+  <rect x="30" y="10" width="4" height="38" rx="1" fill="#6366f1"/>
+  <!-- base -->
+  <rect x="20" y="48" width="24" height="5" rx="2.5" fill="#6366f1"/>
+  <!-- top bar -->
+  <rect x="12" y="8" width="40" height="4" rx="2" fill="#6366f1"/>
+  <!-- left pan -->
+  <line x1="16" y1="12" x2="16" y2="28" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M6 28 Q16 38 26 28 Z" fill="#6366f1"/>
+  <!-- right pan -->
+  <line x1="48" y1="12" x2="48" y2="24" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M38 24 Q48 34 58 24 Z" fill="#6366f1"/>
+</svg>
