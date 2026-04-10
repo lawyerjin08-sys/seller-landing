@@ -253,6 +253,17 @@ a{text-decoration:none;color:inherit;}
   transition:border-color 0.15s;background:var(--white);
 }
 .quiz-form-input:focus{outline:none;border-color:var(--accent);}
+.quiz-form-select{
+  width:100%;padding:14px 16px;font-size:15px;
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:inherit;color:var(--text);
+  transition:border-color 0.15s;background:var(--white);
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ca3af' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+  cursor:pointer;
+}
+.quiz-form-select:focus{outline:none;border-color:var(--accent);}
 .quiz-check{display:flex;align-items:flex-start;gap:8px;margin-bottom:20px;text-align:left;}
 .quiz-check input{margin-top:3px;accent-color:var(--accent);}
 .quiz-check label{font-size:13px;color:var(--text-sub);line-height:1.4;}
@@ -593,6 +604,13 @@ a{text-decoration:none;color:inherit;}
   .float-kakao{bottom:16px;right:16px;}
 }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX');
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init("I2i588ZHaaUSH_jQA");</script>
 <script type="text/javascript">
@@ -706,6 +724,14 @@ a{text-decoration:none;color:inherit;}
           <label class="quiz-form-label">전화번호</label>
           <input type="tel" class="quiz-form-input" id="modal-phone" placeholder="010-0000-0000">
         </div>
+        <div class="quiz-form-group">
+          <label class="quiz-form-label">희망 통화 시간대</label>
+          <select class="quiz-form-select" id="modal-preferred-time">
+            <option value="오전 (9시~12시)">오전 (9시~12시)</option>
+            <option value="오후 (12시~18시)" selected>오후 (12시~18시)</option>
+            <option value="저녁 (18시~21시)">저녁 (18시~21시)</option>
+          </select>
+        </div>
         <div class="quiz-check">
           <input type="checkbox" id="modal-agree">
           <label for="modal-agree"><a onclick="document.getElementById('modal-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
@@ -735,7 +761,7 @@ a{text-decoration:none;color:inherit;}
     <h1>
       플랫폼이 계정을 막고,<br>
       정산금까지 묶었다면.<br>
-      <em>변호사가 직접 대응합니다.</em>
+      <em>계정을 되살리고, 묶인 돈을 돌려받습니다.</em>
     </h1>
     <p class="desc">
       <strong style="color:var(--accent);font-weight:700;">계정 복구부터 묶인 정산금 반환까지.</strong><br>
@@ -995,6 +1021,14 @@ a{text-decoration:none;color:inherit;}
             <label class="quiz-form-label">전화번호</label>
             <input type="tel" class="quiz-form-input" id="inline-phone" placeholder="010-0000-0000">
           </div>
+          <div class="quiz-form-group">
+            <label class="quiz-form-label">희망 통화 시간대</label>
+            <select class="quiz-form-select" id="inline-preferred-time">
+              <option value="오전 (9시~12시)">오전 (9시~12시)</option>
+              <option value="오후 (12시~18시)" selected>오후 (12시~18시)</option>
+              <option value="저녁 (18시~21시)">저녁 (18시~21시)</option>
+            </select>
+          </div>
           <div class="quiz-check">
             <input type="checkbox" id="inline-agree">
             <label for="inline-agree"><a onclick="document.getElementById('inline-privacy').classList.toggle('open');">개인정보 수집·이용</a>에 동의합니다 (필수)</label>
@@ -1206,6 +1240,7 @@ function openQuizModal(){
   _retainerMode = false;
   document.getElementById('quiz-overlay').classList.add('open');
   document.body.classList.add('modal-open');
+  gtag('event', 'modal_open');
 }
 function openRetainerModal(){
   _retainerMode = true;
@@ -1326,6 +1361,7 @@ function createQuizEngine(prefix){
         tagsEl.appendChild(tag);
       });
       showStep('result');
+      gtag('event', 'quiz_complete');
     },
     showRetainerResult: function(){
       document.getElementById(prefix + '-result-title').textContent = '월정액 자문이 필요하시군요.';
@@ -1338,10 +1374,12 @@ function createQuizEngine(prefix){
       tagsEl.appendChild(tag);
       answers.reason = '월정액 자문 문의';
       showStep('result');
+      gtag('event', 'quiz_complete');
     },
     submit: function(){
       var name = document.getElementById(prefix + '-name').value.trim();
       var phone = document.getElementById(prefix + '-phone').value.trim();
+      var preferredTime = document.getElementById(prefix + '-preferred-time').value;
       var agree = document.getElementById(prefix + '-agree').checked;
       if(!name || !phone){ alert('이름과 전화번호를 입력해주세요.'); return; }
       if(!agree){ alert('개인정보 수집·이용에 동의해주세요.'); return; }
@@ -1366,9 +1404,11 @@ function createQuizEngine(prefix){
         experience: answers.attempt || '',
         name: name,
         phone: phone,
+        preferred_time: preferredTime,
         result: resultTitle,
         timestamp: new Date().toLocaleString('ko-KR')
       }).then(function() {
+        gtag('event', 'form_submit');
         showComplete();
       }).catch(function(error) {
         console.error('EmailJS error:', error);
@@ -1420,20 +1460,34 @@ var modalQuiz = createQuizEngine('modal');
   }
 
   var fired = false;
-  var observer = new IntersectionObserver(function(entries){
+  function fireCountUp(){
     if(fired) return;
+    fired = true;
+    countUp(document.getElementById('count-sellers'), 600, 1500);
+    countUp(document.getElementById('count-amount'), 11, 1500);
+    document.getElementById('count-free').style.opacity = '1';
+  }
+
+  var target = document.getElementById('hero-proof');
+  if(!target) return;
+
+  // Check if already in viewport on load
+  var rect = target.getBoundingClientRect();
+  if(rect.top < window.innerHeight && rect.bottom > 0){
+    fireCountUp();
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        fired = true;
-        countUp(document.getElementById('count-sellers'), 600, 1500);
-        countUp(document.getElementById('count-amount'), 11, 1200);
-        document.getElementById('count-free').style.opacity = '1';
+        fireCountUp();
         observer.disconnect();
       }
     });
-  }, {threshold: 0.3});
+  }, {threshold: 0.1});
 
-  observer.observe(document.getElementById('hero-proof'));
+  observer.observe(target);
 })();
 
 // WHY LAWYER scroll animation
