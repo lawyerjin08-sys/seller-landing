@@ -171,6 +171,48 @@ a{text-decoration:none;color:inherit;}
 .hp-lbl{font-size:14px;color:var(--text);margin-top:6px;font-weight:600;}
 .hp-free{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
+/* ===== 히어로 2단 (DDABAK-SPEC 1번 hero-split) ===== */
+.hero-split{
+  max-width:1040px;margin:0 auto;padding:0 24px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+}
+.hero-copy{text-align:left;}
+/* hero-pill → 작은 블루 텍스트 라벨(박스 제거) */
+.hero-copy .hero-pill{
+  background:none;color:var(--accent);padding:0;border-radius:0;
+  margin-bottom:18px;font-size:13px;font-weight:700;letter-spacing:0.02em;
+}
+.hero-copy h1{margin-bottom:20px;}
+.hero-copy .desc{margin-left:0;margin-right:0;}
+.hero-copy .cta-row{justify-content:flex-start;}
+.hero-copy .hero-platforms{justify-content:flex-start;}
+/* 우측: 누끼 인물 + 이름 캡션 세로 그룹 */
+.hero-figure{display:flex;align-items:flex-start;justify-content:center;}
+.hero-portrait{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.hero-photo-wrap{position:relative;width:100%;max-width:340px;}
+/* 하단 페이드(68%→99%) + 외곽 옅은 그림자 */
+.hero-photo{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%);
+          mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%);
+  filter:drop-shadow(0 8px 16px rgba(20,28,46,0.12));
+}
+/* 바닥 타원 그림자(공중에 뜬 느낌 제거) */
+.hero-photo-wrap::after{
+  content:'';position:absolute;left:50%;bottom:6%;transform:translateX(-50%);
+  width:56%;height:20px;border-radius:50%;z-index:-1;
+  background:radial-gradient(ellipse at center, rgba(20,28,46,0.10) 0%, rgba(20,28,46,0) 72%);
+}
+.hero-ident{text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px;}
+.hero-name{display:flex;align-items:baseline;gap:6px;justify-content:center;}
+.hero-name strong{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.01em;}
+.hero-name span{font-size:13px;font-weight:600;color:var(--text-sub);}
+.hero-spec{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:999px;
+  background:var(--accent);color:#fff;font-size:12px;font-weight:700;white-space:nowrap;
+}
+.hero-spec svg{flex:none;}
+
 
 /* ===== QUIZ (shared styles for inline + modal) ===== */
 .quiz-section{padding:80px 0;text-align:center;}
@@ -582,6 +624,16 @@ a{text-decoration:none;color:inherit;}
   .sec-white,.sec-gray,.sec-dark{padding:60px 0;}
   .quiz-section{padding:60px 0;}
   .hero{padding:48px 0 0;}
+  /* 히어로 2단 → 세로 스택 (텍스트 위, 사진 아래) */
+  .hero-split{grid-template-columns:1fr;gap:28px;}
+  .hero-copy{text-align:center;}
+  /* pill은 아래 전담 뱃지와 문구 중복 → 모바일 숨김(DDABAK 스펙) */
+  .hero-copy .hero-pill{display:none;}
+  .hero-copy .cta-row{justify-content:center;}
+  .hero-copy .hero-platforms{justify-content:center;}
+  .hero-copy .desc{margin-left:auto;margin-right:auto;}
+  /* 사진 축소(숨기지 않음, 스펙 방식) */
+  .hero-photo-wrap{max-width:240px;}
   .hp-val,.hp-free{font-size:28px;}
   .hp-val .hp-suffix{font-size:15px;}
   .hero-proof-inner{gap:32px;}
@@ -760,7 +812,8 @@ gtag('config', 'G-301RW9CTW7');
 
 <!-- ===== 1. HERO ===== -->
 <section class="hero">
-  <div class="inner" style="text-align:center;">
+  <div class="hero-split">
+    <div class="hero-copy">
     <span class="hero-pill">온라인 셀러 계정 정지 · 정산금 변호사</span>
     <h1>
       플랫폼이 계정을 막고,<br>
@@ -784,6 +837,18 @@ gtag('config', 'G-301RW9CTW7');
       <span class="hp main">스마트스토어</span>
       <span class="hp">11번가</span>
       <span class="hp">G마켓·옥션</span>
+    </div>
+    </div>
+    <div class="hero-figure">
+      <div class="hero-portrait">
+        <div class="hero-photo-wrap">
+          <img src="profile-hero.png" alt="유환진 변호사" class="hero-photo">
+        </div>
+        <div class="hero-ident">
+          <div class="hero-name"><strong>유환진</strong><span>변호사</span></div>
+          <span class="hero-spec"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 4.4-3 8.5-7 9.7C8 19.5 5 15.4 5 11V5l7-3zm-1.1 12.3l4.9-4.9-1.3-1.3-3.6 3.6-1.6-1.6-1.3 1.3 2.9 2.9z"/></svg> 온라인 셀러 계정 정지·정산금 전담</span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-proof" id="hero-proof">
