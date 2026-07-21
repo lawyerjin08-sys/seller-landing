@@ -19,15 +19,24 @@
 :root {
   --white: #ffffff;
   --bg: #f8f9fb;
-  --dark: #1e1b4b;
-  --dark-mid: #2d2a5e;
+  /* 따박따박 신뢰 블루 토큰 (DDABAK-SPEC 0번) */
+  --blue: #2563EB;
+  --blue-deep: #1B4FD1;
+  --blue-soft: #DBE7FF;
+  --tint: #EAF1FE;
+  --tint-2: #F2F7FF;
+  --navy: #2C3E5E;
+  --kakao: #FEE500;
+  --dark: #141C2E;
+  --dark-mid: #2C3E5E;
   --text: #1a1a2e;
   --text-sub: #5a6170;
   --text-muted: #9ca3af;
-  --accent: #6366f1;
-  --accent-hover: #4f46e5;
-  --accent-light: #eef2ff;
-  --accent-border: #c7d2fe;
+  /* 레거시 accent → 신뢰 블루 매핑 (기존 var(--accent) 사용부 그대로 유지) */
+  --accent: var(--blue);
+  --accent-hover: var(--blue-deep);
+  --accent-light: var(--tint);
+  --accent-border: var(--blue-soft);
   --border: #e5e7eb;
   --green: #059669;
   --green-bg: #ecfdf5;
@@ -51,8 +60,7 @@ a{text-decoration:none;color:inherit;}
 /* ===== NAV ===== */
 .nav{
   position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(12px);
+  background:var(--white);
   border-bottom:1px solid var(--border);
 }
 .nav .inner{
@@ -98,10 +106,6 @@ a{text-decoration:none;color:inherit;}
   background:var(--bg);padding:64px 0 0;text-align:center;
   position:relative;
 }
-.hero::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,#6366f1 0%,#818cf8 50%,#a5b4fc 100%);
-}
 .hero-pill{
   display:inline-block;
   background:var(--accent);color:#fff;
@@ -126,11 +130,11 @@ a{text-decoration:none;color:inherit;}
   background:var(--accent);color:#fff;
   font-size:16px;font-weight:600;padding:16px 36px;
   border-radius:12px;border:none;cursor:pointer;
-  transition:all 0.2s;box-shadow:0 4px 18px rgba(99,102,241,0.28);
+  transition:all 0.2s;box-shadow:0 4px 18px rgba(37,99,235,0.28);
 }
 .btn-primary:hover{
   background:var(--accent-hover);transform:translateY(-2px);
-  box-shadow:0 6px 28px rgba(99,102,241,0.38);
+  box-shadow:0 6px 28px rgba(37,99,235,0.38);
 }
 .btn-primary svg{width:16px;height:16px;fill:#fff;}
 .btn-secondary{
@@ -162,10 +166,10 @@ a{text-decoration:none;color:inherit;}
   display:flex;justify-content:center;gap:48px;
 }
 .hp-item{text-align:center;}
-.hp-val{font-size:36px;font-weight:800;color:#4f46e5;letter-spacing:-0.03em;line-height:1;}
+.hp-val{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;}
 .hp-val .hp-suffix{font-size:18px;font-weight:600;opacity:0;transition:opacity 0.4s;}
 .hp-lbl{font-size:14px;color:var(--text);margin-top:6px;font-weight:600;}
-.hp-free{font-size:36px;font-weight:800;color:#4f46e5;letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
+.hp-free{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
 
 /* ===== QUIZ (shared styles for inline + modal) ===== */
@@ -280,7 +284,7 @@ a{text-decoration:none;color:inherit;}
   width:100%;padding:16px;font-size:16px;font-weight:600;
   background:var(--accent);color:#fff;border:none;border-radius:12px;
   cursor:pointer;transition:all 0.2s;font-family:inherit;
-  box-shadow:0 4px 18px rgba(99,102,241,0.28);
+  box-shadow:0 4px 18px rgba(37,99,235,0.28);
 }
 .quiz-submit:hover{background:var(--accent-hover);transform:translateY(-1px);}
 .quiz-note{
@@ -425,7 +429,7 @@ a{text-decoration:none;color:inherit;}
   transform:translateY(-4px);
   box-shadow:0 8px 24px rgba(0,0,0,0.1);
 }
-.review-card.indigo-bar{border-left:4px solid var(--accent);}
+.review-card.accent-bar{border-left:4px solid var(--accent);}
 .review-card.green-bar{border-left:4px solid #059669;}
 .reviews-more-section{display:none;}
 .reviews-more-section.open{display:block;}
@@ -469,7 +473,7 @@ a{text-decoration:none;color:inherit;}
 .pr-card-main{
   background:var(--accent-light);border:2px solid var(--accent);
   border-radius:16px;padding:32px 28px;
-  box-shadow:0 4px 20px rgba(99,102,241,0.1);
+  box-shadow:0 4px 20px rgba(37,99,235,0.1);
   max-width:520px;margin:0 auto;text-align:left;
 }
 .pr-badge{
@@ -510,7 +514,7 @@ a{text-decoration:none;color:inherit;}
 }
 .ret-mini:hover{
   transform:translateY(-3px);
-  box-shadow:0 4px 16px rgba(99,102,241,0.12);
+  box-shadow:0 4px 16px rgba(37,99,235,0.12);
 }
 .ret-mini-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;}
 .ret-mini-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.5;}
@@ -872,7 +876,7 @@ gtag('config', 'G-301RW9CTW7');
 
     <!-- 초기 노출: 2,400만원 + 계정 복구 -->
     <div class="review-grid">
-      <div class="review-card indigo-bar">
+      <div class="review-card accent-bar">
         <span class="review-tag normal">쿠팡 · 건강기능식품</span>
         <div class="review-amount normal">2,400만원 반환</div>
         <div class="review-impact">"'이게 원래 내 돈이 맞구나' 처음으로 그렇게 느꼈습니다."</div>
@@ -901,7 +905,7 @@ gtag('config', 'G-301RW9CTW7');
     <!-- 펼치면 나오는 카드: 8,000만원 + 연관계정 -->
     <div class="reviews-more-section" id="reviews-more-section">
       <div class="review-grid">
-        <div class="review-card indigo-bar">
+        <div class="review-card accent-bar">
           <span class="review-tag normal">스마트스토어 · 여성의류</span>
           <div class="review-amount normal">8,000만원 반환</div>
           <div class="review-impact">"이 돈 못 받았으면 사업 접어야 했을 수도 있어요."</div>
