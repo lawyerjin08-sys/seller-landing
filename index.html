@@ -121,6 +121,13 @@ a{text-decoration:none;color:inherit;}
   margin-bottom:22px;word-break:keep-all;
 }
 .hero h1 em{font-style:normal;color:var(--accent);}
+/* 형광펜 (DDABAK-SPEC: 글자 하단 58%에만 연노랑) — 완료 화면과 같은 톤(#FFF1C2)
+   font-weight·color는 지정하지 않습니다. h1의 800/var(--dark)를 그대로 물려받게 두는 것. */
+.hl-mark{
+  background:linear-gradient(transparent 58%, #FFF1C2 58%);
+  padding:0 2px;border-radius:2px;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone; /* 줄바꿈돼도 형광펜 유지 */
+}
 .hero .desc{
   font-size:clamp(15px,2.5vw,18px);color:var(--text-sub);
   line-height:1.75;max-width:480px;margin:0 auto 40px;word-break:keep-all;
@@ -902,8 +909,8 @@ gtag('config', 'G-301RW9CTW7');
     <div class="hero-copy">
     <span class="hero-pill">온라인 셀러 영구정지 · 퇴점 대응 변호사</span>
     <h1>
-      영구정지, 연관계정 정지,<br>
-      퇴점 통보까지 받았다면.<br>
+      <span class="hl-mark">영구정지</span>, <span class="hl-mark">연관계정 정지</span>,<br>
+      <span class="hl-mark">퇴점 통보</span>까지 받았다면.<br>
       <em>계정을 되살리고, 사업을 지킵니다.</em>
     </h1>
     <p class="desc">
