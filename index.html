@@ -215,6 +215,54 @@ a{text-decoration:none;color:inherit;}
 .hero-spec svg{flex:none;}
 
 
+/* ===== 갤러리 마퀴 (DDABAK-SPEC 2번 방식) ===== */
+.gallery-band{
+  background:var(--tint-2);
+  padding:56px 0 60px;
+  border-top:1px solid var(--blue-soft);
+  border-bottom:1px solid var(--blue-soft);
+}
+.gallery-head{text-align:center;margin-bottom:32px;padding:0 24px;}
+.gallery-head .sec-label{margin-bottom:10px;}
+/* 제목 문구는 이 한 곳(.gallery-title)만 고치면 됩니다 */
+.gallery-title{
+  font-size:clamp(21px,3.4vw,28px);font-weight:800;
+  letter-spacing:-0.03em;line-height:1.35;color:var(--text);
+}
+/* 양 끝 44px 페이드 마스크 (DDABAK-SPEC 2번과 동일) */
+.gallery-marquee{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
+}
+.gallery-track{
+  display:flex;align-items:center;width:max-content;
+  will-change:transform;
+  /* 46s: 1벌 폭 3120px 기준 약 66px/s (카드가 커져도 체감 속도 유지) */
+  animation:gallery-scroll 46s linear infinite;
+}
+.gallery-marquee:hover .gallery-track{animation-play-state:paused;}
+@keyframes gallery-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}  /* -50% = 2벌 중 1벌 */
+}
+.gallery-item{
+  flex:none;margin-right:20px;
+  border-radius:16px;overflow:hidden;
+  background:var(--white);
+  box-shadow:0 4px 18px rgba(37,99,235,0.10);
+  border:1px solid var(--blue-soft);
+  line-height:0;
+}
+.gallery-item img{
+  display:block;height:300px;width:auto;  /* 높이 통일 + 비율 유지 */
+}
+@media (prefers-reduced-motion:reduce){
+  .gallery-track{animation:none;}
+  .gallery-marquee{overflow-x:auto;}
+}
+
+
 /* ===== QUIZ (shared styles for inline + modal) ===== */
 .quiz-section{padding:80px 0;text-align:center;}
 .quiz-container{
@@ -652,6 +700,11 @@ a{text-decoration:none;color:inherit;}
   .hp-val .hp-suffix{font-size:15px;}
   .hero-proof-inner{gap:32px;}
   .hero-proof{padding:28px 16px;}
+  .gallery-band{padding:40px 0 44px;}
+  .gallery-head{margin-bottom:24px;}
+  .gallery-item img{height:210px;}
+  .gallery-item{margin-right:14px;border-radius:12px;}
+  .gallery-track{animation-duration:34s;}
   .why-item{padding:24px 20px;}
   .cta-row{flex-direction:column;align-items:center;}
   .btn-primary,.btn-secondary{width:100%;max-width:320px;justify-content:center;}
@@ -879,6 +932,46 @@ gtag('config', 'G-301RW9CTW7');
         <div class="hp-free" id="count-free">무료</div>
         <div class="hp-lbl">첫 상황확인</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== 갤러리 마퀴 (해결사례 이미지) ===== -->
+<section class="gallery-band" aria-label="해결 사례 이미지">
+  <div class="gallery-head">
+    <div class="sec-label">CASES</div>
+    <!-- 제목 문구 수정은 여기 한 줄만 -->
+    <h2 class="gallery-title">실제 대응 현장</h2>
+  </div>
+  <div class="gallery-marquee">
+    <div class="gallery-track">
+      <!-- 항목 1벌 (3장 × 4사이클 = 뷰포트 폭 확보용) -->
+      <div class="gallery-item"><img src="images/gallery/gallery-1.webp" alt="판매자 계정정지 합의해제 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-2.webp" alt="마켓플레이스 계정정지 신청취하 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-3.webp" alt="스마트스토어 계정정지 협의취하 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <!-- 끊김 없는 루프용 복제 1벌 (스크린리더에서는 숨김) -->
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
     </div>
   </div>
 </section>
@@ -1600,6 +1693,26 @@ var modalQuiz = createQuizEngine('modal');
   }, {threshold: 0.1});
 
   observer.observe(target);
+})();
+
+// 갤러리 마퀴: 밴드가 화면에 들어올 때 이미지 로드 트리거
+// (트랙이 가로로 길어 화면 밖에 있는 카드는 loading="lazy"가 스스로 발동하지 않음)
+(function(){
+  var band = document.querySelector('.gallery-band');
+  if(!band) return;
+  function loadImages(){
+    band.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+      img.loading = 'eager';
+    });
+  }
+  var rect = band.getBoundingClientRect();
+  if(rect.top < window.innerHeight * 1.5 && rect.bottom > 0){ loadImages(); return; }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ loadImages(); obs.disconnect(); }
+    });
+  }, {rootMargin: '400px 0px'});
+  obs.observe(band);
 })();
 
 // WHY LAWYER scroll animation
