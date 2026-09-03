@@ -589,48 +589,11 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   box-shadow:0 4px 20px rgba(37,99,235,0.1);
   max-width:520px;margin:0 auto;text-align:left;
 }
-.pr-badge{
-  display:inline-block;font-size:12px;font-weight:700;
-  background:var(--accent);color:#fff;
-  padding:4px 14px;border-radius:100px;margin-bottom:16px;
-}
+.pr-card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .pr-card-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.pr-card-head .pr-card-title{margin-bottom:0;}
 .pr-card-price{font-size:28px;font-weight:800;color:var(--accent);margin-bottom:12px;}
 .pr-card-desc{font-size:15px;color:var(--text-sub);line-height:1.6;}
-.pr-deduct{
-  text-align:center;font-size:14px;font-weight:600;color:var(--accent);
-  margin:20px 0;
-}
-.pr-card-sub{
-  background:var(--white);border:1px solid var(--accent-border);
-  border-radius:16px;padding:28px 24px;
-  max-width:520px;margin:0 auto;text-align:left;
-}
-.pr-card-sub .pr-card-title{font-size:18px;font-weight:700;}
-.pr-card-sub .pr-card-price{font-size:24px;}
-.pr-card-sub .pr-card-desc{font-size:14px;}
-.pr-price-note{font-size:13px;color:var(--text-muted);margin-top:2px;}
-
-
-/* ===== 7. 월정액 ===== */
-.retainer{text-align:center;}
-.ret-price-big{font-size:28px;font-weight:800;color:var(--accent);margin-bottom:4px;}
-.ret-price-sub{font-size:14px;color:var(--text-muted);margin-bottom:32px;}
-.ret-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  max-width:520px;margin:0 auto;
-}
-.ret-mini{
-  background:var(--white);border-radius:12px;padding:24px;
-  border:1px solid var(--accent-border);text-align:left;
-  transition:all 0.2s;
-}
-.ret-mini:hover{
-  transform:translateY(-3px);
-  box-shadow:0 4px 16px rgba(37,99,235,0.12);
-}
-.ret-mini-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;}
-.ret-mini-text{font-size:15px;font-weight:600;color:var(--text);line-height:1.5;}
 
 
 /* ===== 8. FAQ ===== */
@@ -737,8 +700,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .lawyer-card{padding:28px 20px;}
   .lawyer-photo{width:220px;height:275px;}
   .lawyer-photo-wrap::before{width:260px;height:295px;top:-16px;}
-  .pr-card-main,.pr-card-sub{padding:24px 20px;}
-  .ret-grid{grid-template-columns:1fr;}
+  .pr-card-main{padding:24px 20px;}
   .review-grid{grid-template-columns:1fr;}
   .quiz-container{border-radius:12px;padding:28px 16px;}
   .quiz-modal{
@@ -1305,76 +1267,15 @@ gtag('config', 'G-301RW9CTW7');
     </div>
     <div class="pr-arrow">↓</div>
 
-    <!-- 2단계: 큰 강조 카드 -->
+    <!-- 2단계: 강조 카드 -->
     <div class="pr-card-main">
-      <span class="pr-badge">가장 많이 선택하는 단계</span>
-      <div class="pr-card-title">사건 검토 + 변호사 명의 내용증명</div>
-      <div class="pr-card-price">55만원</div>
-      <div class="pr-card-desc">변호사가 사건을 분석하고, 플랫폼 법무팀 앞으로 변호사 명의 내용증명을 발송합니다. 계정 복구 요청, 연관계정 정지 해제, 정산금 반환 청구 — 상황에 맞게 변호사가 판단합니다.</div>
-    </div>
-
-    <!-- 차감 안내 -->
-    <div class="pr-deduct">↓ 3단계로 넘어가면 55만원이 차감됩니다</div>
-
-    <!-- 3단계: 중간 강조 카드 -->
-    <div class="pr-card-sub">
-      <div class="pr-card-title">본격 법적 대응 패키지</div>
-      <div class="pr-card-price">165만원</div>
-      <div style="background:var(--accent-light);border-radius:8px;padding:10px 16px;margin-top:12px;font-size:13px;color:var(--text-sub);line-height:1.5;">2단계를 먼저 진행하셨다면 <span style="font-weight:700;color:var(--accent);font-size:15px;">55만원을 빼고 110만원만</span> 내시면 됩니다</div>
-      <ul style="margin:16px 0 12px;padding:0;list-style:none;text-align:left;">
-        <li style="font-size:15px;color:var(--text);line-height:1.8;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>공정위에 불공정약관 신고 접수</li>
-        <li style="font-size:15px;color:var(--text);line-height:1.8;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>유관기관(방통위 등)에 민원 제출</li>
-        <li style="font-size:15px;color:var(--text);line-height:1.8;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>신고 접수 사실 + 가처분 준비를 명시한 2차 내용증명 발송</li>
-        <li style="font-size:15px;color:var(--text);line-height:1.8;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);font-weight:700;">✓</span>묶인 정산금 반환 청구서 발송</li>
-      </ul>
-      <div class="pr-card-desc" style="margin-top:8px;font-weight:600;color:var(--text);">경고가 아니라 실제로 움직입니다. 플랫폼이 받는 압박이 달라집니다.</div>
-    </div>
-
-    <!-- 4단계: 텍스트 라인 -->
-    <div class="pr-arrow">↓</div>
-    <div class="pr-line">
-      <div class="pr-line-top"><span class="pr-num">4</span> 본격 법적 대응 · <b style="color:var(--accent)">상담 후 안내</b></div>
-      <div class="pr-line-desc">계정 복구 가처분, 정산금 반환 소송, 손해배상 청구 등. 상황에 맞는 법적 절차를 설계합니다. 구체적인 비용은 상황확인 전화에서 안내드립니다.</div>
+      <div class="pr-card-head"><span class="pr-num">2</span><span class="pr-card-title">영구정지 · 완전퇴점 해제 플랜</span></div>
+      <div class="pr-card-price">상담 후 안내</div>
+      <div class="pr-card-desc">계정 영구정지·완전퇴점 상황에 맞는 법적 절차를 설계합니다. 가처분, 소송, 정산금 반환 청구 등 필요한 수단을 사건에 맞게 구성하며, 구체적인 비용은 상황확인 전화에서 안내드립니다.</div>
     </div>
 
     <div class="mid-cta" style="margin-top:32px;">
       <button onclick="openQuizModal()" class="btn-primary">1분 무료 상황확인</button>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== 7. 월정액 자문 ===== -->
-<section class="sec-gray retainer">
-  <div class="inner">
-    <div class="sec-label">MONTHLY PLAN</div>
-    <h2 class="sec-title">다시 멈추지 않기 위한 법률 파트너</h2>
-    <p class="sec-sub">복구 후에도 안심할 수 없다면, 변호사가 옆에 있으면 됩니다.</p>
-
-    <div class="ret-price-big">월 55만원</div>
-    <div class="ret-price-sub">계약 기간 없음 · 언제든 해지</div>
-
-    <div class="ret-grid">
-      <div class="ret-mini">
-        <div class="ret-mini-label">새 상품 올릴 때마다 불안하세요?</div>
-        <div class="ret-mini-text">등록 전에 카톡 한 통이면 됩니다. 정지 리스크를 미리 확인해드려요.</div>
-      </div>
-      <div class="ret-mini">
-        <div class="ret-mini-label">경쟁 셀러가 내 상품을 신고하면?</div>
-        <div class="ret-mini-text">즉시 대응합니다. 부당 신고는 역으로 법적 조치까지.</div>
-      </div>
-      <div class="ret-mini">
-        <div class="ret-mini-label">고객 환불·클레임이 점점 늘면?</div>
-        <div class="ret-mini-text">변호사가 대응 방법을 잡아드리고, 심한 건 직접 처리합니다.</div>
-      </div>
-      <div class="ret-mini">
-        <div class="ret-mini-label">사업이 커지면 법률 이슈도 늘어납니다</div>
-        <div class="ret-mini-text">계약서, 직원, 세금, 브랜드 — 뭐든 카톡으로 물어보세요.</div>
-      </div>
-    </div>
-
-    <div class="mid-cta" style="margin-top:28px;">
-      <button onclick="openRetainerModal()" class="btn-primary">월정액 자문 상담하기</button>
     </div>
   </div>
 </section>
@@ -1457,19 +1358,10 @@ gtag('config', 'G-301RW9CTW7');
 <!-- ===== SCRIPTS ===== -->
 <script>
 // Quiz Modal open/close
-var _retainerMode = false;
 function openQuizModal(){
-  _retainerMode = false;
   document.getElementById('quiz-overlay').classList.add('open');
   document.body.classList.add('modal-open');
   gtag('event', 'modal_open');
-}
-function openRetainerModal(){
-  _retainerMode = true;
-  document.getElementById('quiz-overlay').classList.add('open');
-  document.body.classList.add('modal-open');
-  // Skip quiz, go straight to retainer result
-  modalQuiz.showRetainerResult();
 }
 function closeQuizModal(){
   document.getElementById('quiz-overlay').classList.remove('open');
@@ -1582,19 +1474,6 @@ function createQuizEngine(prefix){
         tag.textContent = v;
         tagsEl.appendChild(tag);
       });
-      showStep('result');
-      gtag('event', 'quiz_complete');
-    },
-    showRetainerResult: function(){
-      document.getElementById(prefix + '-result-title').textContent = '월정액 자문이 필요하시군요.';
-      document.getElementById(prefix + '-result-body').textContent = '현재 운영 상황을 파악한 후, 맞춤형 자문 범위를 안내드립니다.';
-      var tagsEl = document.getElementById(prefix + '-result-tags');
-      tagsEl.innerHTML = '';
-      var tag = document.createElement('span');
-      tag.style.cssText = 'display:inline-block;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--accent);border:1px solid var(--accent-border);';
-      tag.textContent = '월정액 자문 문의';
-      tagsEl.appendChild(tag);
-      answers.reason = '월정액 자문 문의';
       showStep('result');
       gtag('event', 'quiz_complete');
     },
