@@ -238,8 +238,8 @@ a{text-decoration:none;color:inherit;}
 .gallery-track{
   display:flex;align-items:center;width:max-content;
   will-change:transform;
-  /* 57s: 1벌 폭 약 3770px 기준 약 66px/s (카드 구성이 바뀌어도 체감 속도 유지) */
-  animation:gallery-scroll 57s linear infinite;
+  /* 63s: 1벌 폭 약 4150px 기준 약 66px/s (카드 구성이 바뀌어도 체감 속도 유지) */
+  animation:gallery-scroll 63s linear infinite;
 }
 .gallery-marquee:hover .gallery-track{animation-play-state:paused;}
 @keyframes gallery-scroll{
@@ -721,7 +721,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   /* 영상은 16:9라 같은 높이면 모바일 화면을 거의 다 차지 → 영상만 낮춤 */
   a.gallery-item img{height:170px;}
   .gallery-item{margin-right:14px;border-radius:12px;}
-  .gallery-track{animation-duration:36s;}
+  .gallery-track{animation-duration:42s;}
   .gv-play{width:48px;height:48px;margin:-24px 0 0 -24px;}
   .gv-play svg{width:17px;height:19px;}
   .why-item{padding:24px 20px;}
@@ -965,28 +965,32 @@ gtag('config', 'G-301RW9CTW7');
   </div>
   <div class="gallery-marquee">
     <div class="gallery-track">
-      <!-- 항목 1벌 (사진·영상 번갈아 5장 x 2사이클 = 뷰포트 폭 확보용) -->
+      <!-- 항목 1벌 (사진 10 + 영상 2, 번갈아 배치) -->
       <div class="gallery-item"><img src="images/gallery/gallery-1.webp" alt="판매자 계정정지 합의해제 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-7.webp" alt="스마트스토어 퇴점 조치 해제 후 의뢰인 감사 메시지" loading="lazy" width="593" height="553" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-4.webp" alt="가품의심 사건 퇴점조치 해제 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
       <a class="gallery-item" href="https://youtu.be/GuXjq5Gb0mI?si=NjZLZ3tJWG0nKUwT" target="_blank" rel="noopener"><img src="images/gallery/video-1.webp" alt="쿠팡 판매자 약관 변경 해설 영상" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
       <div class="gallery-item"><img src="images/gallery/gallery-2.webp" alt="마켓플레이스 계정정지 신청취하 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-8.webp" alt="쿠팡 가품 소명 완료 후 의뢰인 감사 메시지" loading="lazy" width="554" height="595" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-5.webp" alt="연관계정 정지 해제 완료 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-10.webp" alt="쿠팡 계정 해제 및 상품 판매조치 완료 안내 메일" loading="lazy" width="847" height="596" decoding="async"></div>
       <a class="gallery-item" href="https://youtu.be/0iIJg68sOag?si=nayd4kwnZ_rvZiSf" target="_blank" rel="noopener"><img src="images/gallery/video-2.webp" alt="스마트스토어 가품 판정·퇴점 대응 해설 영상" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
       <div class="gallery-item"><img src="images/gallery/gallery-3.webp" alt="스마트스토어 계정정지 협의취하 종결 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <a class="gallery-item" href="https://youtu.be/GuXjq5Gb0mI?si=NjZLZ3tJWG0nKUwT" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-1.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <a class="gallery-item" href="https://youtu.be/0iIJg68sOag?si=nayd4kwnZ_rvZiSf" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-2.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-9.webp" alt="쿠팡 계정 영구정지 해제 후 의뢰인 감사 메시지" loading="lazy" width="554" height="470" decoding="async"></div>
+      <div class="gallery-item"><img src="images/gallery/gallery-6.webp" alt="쿠팡과 합의로 계정정지 해제된 사례" loading="lazy" width="1000" height="1250" decoding="async"></div>
       <!-- 끊김 없는 루프용 복제 1벌 (스크린리더에서는 숨김) -->
       <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-7.webp" alt="" loading="lazy" width="593" height="553" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-4.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
       <a class="gallery-item" href="https://youtu.be/GuXjq5Gb0mI?si=NjZLZ3tJWG0nKUwT" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-1.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
       <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-8.webp" alt="" loading="lazy" width="554" height="595" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-5.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-10.webp" alt="" loading="lazy" width="847" height="596" decoding="async"></div>
       <a class="gallery-item" href="https://youtu.be/0iIJg68sOag?si=nayd4kwnZ_rvZiSf" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-2.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
       <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-1.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <a class="gallery-item" href="https://youtu.be/GuXjq5Gb0mI?si=NjZLZ3tJWG0nKUwT" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-1.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-2.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
-      <a class="gallery-item" href="https://youtu.be/0iIJg68sOag?si=nayd4kwnZ_rvZiSf" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/gallery/video-2.webp" alt="" loading="lazy" width="1200" height="675" decoding="async"><span class="gv-play"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true"><path d="M19 9.27a2 2 0 010 3.46L3 21.86A2 2 0 010 20.13V1.87A2 2 0 013 .14l16 9.13z" fill="#fff"/></svg></span></a>
-      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-3.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-9.webp" alt="" loading="lazy" width="554" height="470" decoding="async"></div>
+      <div class="gallery-item" aria-hidden="true"><img src="images/gallery/gallery-6.webp" alt="" loading="lazy" width="1000" height="1250" decoding="async"></div>
     </div>
   </div>
 </section>
