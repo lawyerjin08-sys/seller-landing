@@ -43,7 +43,7 @@ seller-landing/
 | 용도 | 서비스 | 식별자 / 로드 방식 |
 |------|--------|-------------------|
 | 웹폰트 | **Pretendard** | jsDelivr CDN (`orioncactus/pretendard@v1.3.9`) |
-| 상담 신청 전송 | **EmailJS** | `@emailjs/browser@4`, public key `I2i588ZHaaUSH_jQA`, service `service_myseller`, template `template_gog2y3c` |
+| 상담 신청 전송 | **EmailJS** | `@emailjs/browser@4`, public key `V6m-KiVF10eGpStjc`, service `service_myseller`, template `template_gog2y3c` |
 | 분석 | **Google Analytics (gtag)** | `G-301RW9CTW7` |
 | 세션 분석 | **Microsoft Clarity** | `w5mapb4l56` |
 
