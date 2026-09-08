@@ -203,6 +203,10 @@ a{text-decoration:none;color:inherit;}
   display:block;width:100%;height:auto;
   -webkit-mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%);
           mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,0) 99%);
+  -webkit-mask-size:100% 100%;
+          mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;
+          mask-repeat:no-repeat;
   filter:drop-shadow(0 8px 16px rgba(20,28,46,0.12));
 }
 /* 바닥 타원 그림자(공중에 뜬 느낌 제거) */
@@ -241,6 +245,10 @@ a{text-decoration:none;color:inherit;}
   overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
           mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
+  -webkit-mask-size:100% 100%;
+          mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;
+          mask-repeat:no-repeat;
 }
 .gallery-track{
   display:flex;align-items:center;width:max-content;
@@ -300,6 +308,10 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
           mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
+  -webkit-mask-size:100% 100%;
+          mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;
+          mask-repeat:no-repeat;
 }
 .case-track{
   display:flex;align-items:stretch;width:max-content;
@@ -314,20 +326,29 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
 }
 .case-card{
   flex:none;width:300px;margin-right:14px;padding:0;
-  display:flex;flex-direction:column;text-align:center;
+  display:flex;flex-direction:column;align-items:stretch;text-align:center;
   background:var(--white);border:1px solid var(--blue-soft);
   border-radius:14px;overflow:hidden;
   box-shadow:0 4px 18px rgba(37,99,235,0.10);
   font:inherit;cursor:zoom-in;
 }
+/* iOS Safari 는 <button> 안의 flex 자식을 늘려주지 않아 블록이 글자 폭만큼만 그려진다.
+   display:block + width:100% + align-self:stretch 로 카드 폭을 강제로 채운다. */
+.case-card-head,
+.case-card-sum,
+.case-card-src,
+.case-card-img{
+  display:block;width:100%;box-sizing:border-box;align-self:stretch;
+}
 .case-card-head{
   background:var(--blue);color:#fff;
   font-size:15px;font-weight:800;letter-spacing:-0.02em;
-  padding:11px 12px;
+  padding:11px 12px;text-align:center;
 }
 .case-card-sum{
   font-size:13.5px;font-weight:700;color:var(--text);
   line-height:1.4;word-break:keep-all;padding:11px 12px 10px;
+  text-align:center;
 }
 .case-card-src{
   background:#F1F3F7;color:#5A6474;
