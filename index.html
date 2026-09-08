@@ -291,11 +291,15 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   font-size:15px;font-weight:800;color:var(--text);
   text-align:left;letter-spacing:-0.02em;margin-bottom:10px;
 }
-/* 양 끝 28px 페이드 마스크 (DDABAK-SPEC 2번과 동일 방식) */
+/* 컨테이너(퀴즈 섹션/모달) 양끝까지 풀블리드 + 양 끝 44px 페이드 마스크 (DDABAK-SPEC 2번)
+   padding-left 는 트랙이 아니라 이 컨테이너에 준다 — 트랙에 주면 1벌 폭 != 50% 가 되어 루프 이음매가 어긋남 */
 .case-marquee{
+  margin-left:calc(-1 * var(--case-bleed, 28px));
+  margin-right:calc(-1 * var(--case-bleed, 28px));
+  padding-left:var(--case-bleed, 28px);
   overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);
-          mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 44px,#000 calc(100% - 44px),transparent 100%);
 }
 .case-track{
   display:flex;align-items:stretch;width:max-content;
@@ -331,10 +335,10 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   padding:6px 12px;
   border-top:1px solid #E5E8EE;border-bottom:1px solid #E5E8EE;
 }
-.case-card-img{height:140px;overflow:hidden;background:var(--white);}
+.case-card-img{height:220px;overflow:hidden;background:var(--tint-2);}
 .case-card-img img{
   display:block;width:100%;height:100%;
-  object-fit:cover;object-position:center top;  /* 서류 카드는 인라인으로 위치 보정 */
+  object-fit:contain;  /* 서류 전체가 보이도록 축소, 남는 여백은 카드 배경색 */
 }
 .case-card:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
 .case-note{font-size:11.5px;color:var(--text-sub);text-align:center;margin-top:10px;}
@@ -367,6 +371,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   background:var(--white);border-radius:20px;
   box-shadow:0 2px 16px rgba(0,0,0,0.06);
   padding:36px 28px;
+  --case-bleed:28px;  /* 결과 마퀴 풀블리드용 — 좌우 padding 과 항상 같은 값으로 */
 }
 .quiz-overlay{
   display:none;position:fixed;top:0;left:0;width:100%;height:100%;
@@ -378,6 +383,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   position:relative;width:100%;max-width:480px;max-height:90vh;
   overflow-y:auto;background:var(--white);border-radius:20px;
   padding:36px 28px;margin:20px;
+  --case-bleed:28px;  /* 결과 마퀴 풀블리드용 — 좌우 padding 과 항상 같은 값으로 */
 }
 .quiz-close{
   position:absolute;top:16px;right:16px;
@@ -777,7 +783,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .lawyer-photo-wrap::before{width:260px;height:295px;top:-16px;}
   .pr-card-main{padding:24px 20px;}
   .review-grid{grid-template-columns:1fr;}
-  .quiz-container{border-radius:12px;padding:28px 16px;}
+  .quiz-container{border-radius:12px;padding:28px 16px;--case-bleed:16px;}
   .quiz-modal{
     width:100%;height:100%;max-height:100vh;
     border-radius:0;margin:0;
@@ -792,7 +798,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .case-card{width:260px;margin-right:12px;}
   .case-card-head{font-size:14px;padding:10px 12px;}
   .case-card-sum{font-size:13px;padding:10px 12px 9px;}
-  .case-card-img{height:120px;}
+  .case-card-img{height:160px;}
 }
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-301RW9CTW7"></script>
@@ -1461,27 +1467,29 @@ function closeQuizModal(){
 // Reusable quiz engine factory
 /* ===== 비슷한 사건의 결과 — 카드 마퀴 (인라인/모달 퀴즈 공용) =====
    type: 영구정지 / 판매중지 / 연관계정 / 퇴점 / 정산금보류 (Q2 답변과 매칭)
-   pos : 카드 상단 미리보기에서 보여줄 이미지 위치(object-position) */
+   유형은 Q2 답변과 매칭해 해당 카드를 앞쪽에 배치하는 데 씁니다.
+   card: 카드 안에 넣을 이미지(있으면). 홍보 카드형 원본은 상단 헤드라인이 카드 헤더와
+         겹쳐서 서류+도장만 남긴 -crop 본을 쓰고, 라이트박스는 img(원본)를 그대로 띄웁니다 */
 var CASE_DATA = [
-  {img:'images/cases/case-1.webp', pos:'center 34%', type:'영구정지',
+  {img:'images/cases/case-1.webp', card:'images/cases/case-1-crop.webp', type:'영구정지',
    head:'계정정지 해제', sum:'쿠팡 영구정지, 합의로 해제', src:'쿠팡 · 가처분 신청취하서',
    alt:'쿠팡 판매자 계정정지 합의 해제 신청취하서'},
-  {img:'images/cases/case-2.webp', pos:'center 34%', type:'연관계정',
+  {img:'images/cases/case-2.webp', card:'images/cases/case-2-crop.webp', type:'연관계정',
    head:'연관계정 정지 해제', sum:'연쇄 정지 계정, 조치 해제', src:'쿠팡 · 가처분 신청취하서',
    alt:'연관계정 정지 해제 신청취하서'},
-  {img:'images/cases/case-3.webp', pos:'center 34%', type:'퇴점',
+  {img:'images/cases/case-3.webp', card:'images/cases/case-3-crop.webp', type:'퇴점',
    head:'퇴점조치 해제', sum:'가품의심 퇴점, 협의로 해제', src:'스마트스토어 · 법원 제출 의견서',
    alt:'스마트스토어 가품의심 퇴점조치 해제 의견서'},
-  {img:'images/cases/case-4.webp', pos:'center top', type:'판매중지',
+  {img:'images/cases/case-4.webp', type:'판매중지',
    head:'계정 해제·판매 재개', sum:'소명 인정, 계정 활성화', src:'쿠팡 · 소명 결과 회신 메일',
    alt:'쿠팡 계정 해제 및 상품 판매조치 완료 안내 메일'},
-  {img:'images/cases/case-5.webp', pos:'center top', type:'영구정지',
+  {img:'images/cases/case-5.webp', type:'영구정지',
    head:'영구정지 해제', sum:'영구정지 풀림, 판매 재개', src:'쿠팡 · 의뢰인 후기',
    alt:'쿠팡 계정 영구정지 해제 후 의뢰인 감사 메시지'},
-  {img:'images/cases/case-6.webp', pos:'center top', type:'판매중지',
+  {img:'images/cases/case-6.webp', type:'판매중지',
    head:'가품 소명 완료', sum:'가품 판정, 소명으로 해소', src:'쿠팡 · 의뢰인 후기',
    alt:'쿠팡 가품 소명 완료 후 의뢰인 감사 메시지'},
-  {img:'images/cases/case-7.webp', pos:'center top', type:'퇴점',
+  {img:'images/cases/case-7.webp', type:'퇴점',
    head:'퇴점 조치 해제', sum:'퇴점 해제, 사업 재개', src:'스마트스토어 · 의뢰인 후기',
    alt:'스마트스토어 퇴점 조치 해제 후 의뢰인 감사 메시지'}
 ];
@@ -1508,9 +1516,9 @@ function caseCardHTML(c, dup, eager){
     + '<span class="case-card-head">' + caseEsc(c.head) + '</span>'
     + '<span class="case-card-sum">' + caseEsc(c.sum) + '</span>'
     + '<span class="case-card-src">' + caseEsc(c.src) + '</span>'
-    + '<span class="case-card-img"><img src="' + caseEsc(c.img) + '"'
+    + '<span class="case-card-img"><img src="' + caseEsc(c.card || c.img) + '"'
     + ' alt="' + (dup ? '' : caseEsc(c.alt)) + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="' + (eager ? 'sync' : 'async') + '"'
-    + ' style="object-position:' + caseEsc(c.pos) + ';"></span>'
+    + '></span>'
     + '</button>';
 }
 
