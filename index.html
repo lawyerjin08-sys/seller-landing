@@ -104,7 +104,7 @@ a{text-decoration:none;color:inherit;}
 
 /* ===== 1. HERO ===== */
 .hero{
-  background:var(--bg);padding:64px 0 0;text-align:center;
+  background:var(--bg);padding:64px 0 56px;text-align:center;
   position:relative;
 }
 .hero-pill{
@@ -166,18 +166,6 @@ a{text-decoration:none;color:inherit;}
   font-size:12px;font-weight:500;color:var(--accent);
 }
 .hero-platforms .hp.main{font-size:13px;font-weight:700;}
-.hero-proof{
-  background:var(--accent-light);padding:36px 24px;margin-top:40px;
-}
-.hero-proof-inner{
-  max-width:600px;margin:0 auto;
-  display:flex;justify-content:center;gap:48px;
-}
-.hp-item{text-align:center;}
-.hp-val{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;}
-.hp-val .hp-suffix{font-size:18px;font-weight:600;opacity:0;transition:opacity 0.4s;}
-.hp-lbl{font-size:14px;color:var(--text);margin-top:6px;font-weight:600;}
-.hp-free{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;opacity:0;transition:opacity 0.6s;}
 
 /* ===== 히어로 2단 (DDABAK-SPEC 1번 hero-split) ===== */
 .hero-split{
@@ -603,60 +591,6 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
 .timeline-desc{font-size:13px;color:var(--text-muted);font-style:italic;line-height:1.5;margin-top:4px;}
 
 
-/* ===== 5. REVIEWS ===== */
-.reviews{text-align:center;}
-.review-featured{
-  max-width:600px;margin:0 auto 20px;
-  background:#e0e7ff;border:3px solid var(--accent);
-  border-radius:14px;padding:28px 24px;text-align:left;
-}
-.review-amount{font-weight:800;letter-spacing:-0.03em;line-height:1.2;margin-bottom:10px;}
-.review-amount.featured{font-size:42px;color:var(--accent);}
-.review-amount.normal{font-size:28px;color:var(--accent);}
-.review-amount.green{font-size:28px;color:var(--green);}
-.review-tag{
-  display:inline-block;font-size:11px;font-weight:700;
-  padding:4px 12px;border-radius:100px;margin-bottom:14px;
-}
-.review-tag.featured{background:var(--white);color:var(--accent);border:1px solid var(--accent-border);}
-.review-tag.normal{background:#f3f4f6;color:var(--text-muted);}
-.review-impact{
-  font-size:17px;font-weight:600;color:var(--text);
-  line-height:1.5;margin:16px 0;word-break:keep-all;
-}
-.review-body{font-size:14px;color:var(--text-sub);line-height:1.7;word-break:keep-all;text-align:left;}
-.review-body strong{color:var(--text);font-weight:600;}
-.review-result{
-  margin-top:14px;padding-top:14px;border-top:1px solid var(--border);
-  font-size:14px;font-weight:600;color:var(--accent);
-}
-.review-result.green{color:var(--green);}
-.review-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  max-width:600px;margin:0 auto;
-}
-.review-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:14px;padding:24px 20px;text-align:left;
-  transition:all 0.2s;
-}
-.review-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 8px 24px rgba(0,0,0,0.1);
-}
-.review-card.accent-bar{border-left:4px solid var(--accent);}
-.review-card.green-bar{border-left:4px solid #059669;}
-.reviews-more-section{display:none;}
-.reviews-more-section.open{display:block;}
-.review-more-toggle{
-  font-size:14px;font-weight:600;color:var(--accent);
-  cursor:pointer;margin-top:24px;display:inline-block;
-}
-.review-more-toggle:hover{text-decoration:underline;}
-.review-disclaimer{
-  text-align:center;font-size:12px;color:var(--text-muted);
-  margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;
-}
 .mid-cta{text-align:center;margin-top:36px;}
 
 
@@ -772,7 +706,7 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .inner{padding:0 20px;}
   .sec-white,.sec-gray,.sec-dark{padding:60px 0;}
   .quiz-section{padding:60px 0;}
-  .hero{padding:48px 0 0;}
+  .hero{padding:48px 0 40px;}
   /* 히어로 2단 → 세로 스택 (텍스트 위, 사진 아래) */
   .hero-split{grid-template-columns:1fr;gap:28px;}
   .hero-copy{text-align:center;}
@@ -783,10 +717,6 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .hero-copy .desc{margin-left:auto;margin-right:auto;}
   /* 사진 축소(숨기지 않음, 스펙 방식) */
   .hero-photo-wrap{max-width:240px;}
-  .hp-val,.hp-free{font-size:28px;}
-  .hp-val .hp-suffix{font-size:15px;}
-  .hero-proof-inner{gap:32px;}
-  .hero-proof{padding:28px 16px;}
   .gallery-band{padding:40px 0 44px;}
   .gallery-head{margin-bottom:24px;}
   .gallery-item img{height:210px;}
@@ -803,14 +733,12 @@ a.gallery-item:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
   .lawyer-photo{width:220px;height:275px;}
   .lawyer-photo-wrap::before{width:260px;height:295px;top:-16px;}
   .pr-card-main{padding:24px 20px;}
-  .review-grid{grid-template-columns:1fr;}
   .quiz-container{border-radius:12px;padding:28px 16px;--case-bleed:16px;}
   .quiz-modal{
     width:100%;height:100%;max-height:100vh;
     border-radius:0;margin:0;
   }
   .quiz-option{min-height:48px;}
-  .review-amount.featured{font-size:32px;}
   .why-title{font-size:20px;}
   .why-highlight p{font-size:15px;}
   .sec-sub{font-size:14px;}
@@ -1015,22 +943,6 @@ gtag('config', 'G-301RW9CTW7');
       </div>
     </div>
   </div>
-  <div class="hero-proof" id="hero-proof">
-    <div class="hero-proof-inner">
-      <div class="hp-item">
-        <div class="hp-val"><span id="count-sellers">0</span><span class="hp-suffix">명+</span></div>
-        <div class="hp-lbl">셀러가 먼저 찾았습니다</div>
-      </div>
-      <div class="hp-item">
-        <div class="hp-val"><span id="count-amount">0</span><span class="hp-suffix">억+</span></div>
-        <div class="hp-lbl">반환받은 정산금</div>
-      </div>
-      <div class="hp-item">
-        <div class="hp-free" id="count-free">무료</div>
-        <div class="hp-lbl">첫 상황확인</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 
@@ -1121,83 +1033,6 @@ gtag('config', 'G-301RW9CTW7');
           <div class="timeline-desc">"지금은 셀러 곁에서 직접 싸웁니다. <span style="color:var(--accent);font-weight:700;">600건 이상</span>의 사건 해결 경험."</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== 3. REVIEWS ===== -->
-<section class="sec-gray reviews">
-  <div class="inner">
-    <div class="sec-label">REVIEWS</div>
-    <h2 class="sec-title">먼저 경험한 셀러들</h2>
-
-    <!-- 피처드: 1억 2,700만원 -->
-    <div class="review-featured">
-      <span class="review-tag featured">쿠팡·11번가 · 해외구매대행 법인</span>
-      <div class="review-amount featured">1억 2,700만원 반환</div>
-      <div class="review-impact">"법률 대리 없이는 절대 해결 못 했을 겁니다."</div>
-      <div class="review-body">
-        두 개 플랫폼에서 동시에 계정 정지. 묶인 정산금 합산 1억 2,700만원. 사유는 '병행수입 요건 미충족'이었는데, 실제로는 관세사 쪽에서 <strong>서류 업로드가 늦어진 것뿐</strong>이었습니다. 저희가 아무리 설명해도 플랫폼은 받아주지 않았습니다. 변호사님이 통관 기록과 정품 인증서를 법적으로 재구성하고, <strong>정산금 보류 자체가 부당하다는 법률의견서를 제출</strong>하셨습니다. <strong>1억이 넘는 돈이 묶여 있으면 회사 운영 자체가 불가능합니다.</strong> 법률 대리 없이는 절대 해결 못 했을 겁니다.
-      </div>
-      <div class="review-result">✓ 정산금 전액 반환</div>
-    </div>
-
-    <!-- 초기 노출: 2,400만원 + 계정 복구 -->
-    <div class="review-grid">
-      <div class="review-card accent-bar">
-        <span class="review-tag normal">쿠팡 · 건강기능식품</span>
-        <div class="review-amount normal">2,400만원 반환</div>
-        <div class="review-impact">"'이게 원래 내 돈이 맞구나' 처음으로 그렇게 느꼈습니다."</div>
-        <div class="review-body">
-          영구정지 통보받고 고객센터에 수십 번 전화했는데 <strong>매번 '약관 위반이라 정산 불가'만 반복</strong>하더라고요. 변호사님이 <strong>'구매확정 된 매출채권은 계정 정지랑 별개로 받을 수 있다'</strong>고 하셔서, <strong>한 달 만에 전액 돌려받았어요.</strong>
-        </div>
-        <div class="review-result">✓ 전액 반환 완료</div>
-      </div>
-
-      <div class="review-card green-bar">
-        <span class="review-tag normal">무신사 · 스니커즈</span>
-        <div class="review-amount green">계정 복구</div>
-        <div class="review-impact">"반신반의했는데 진짜 복구됐어요."</div>
-        <div class="review-body">
-          정품만 취급하는데 가품 판정. <strong>도매처에 서류 요청했더니 안 줍니다.</strong> 변호사님이 유통경로 소명 자료를 법적으로 재구성해서 <strong>법률의견서랑 같이 넣어주셨는데, 진짜 복구됐어요.</strong>
-        </div>
-        <div class="review-result green">✓ 계정 정지 해제</div>
-      </div>
-    </div>
-
-    <!-- 더 보기 토글 -->
-    <div style="text-align:center;">
-      <span class="review-more-toggle" id="reviews-more-btn" onclick="toggleMoreReviews()">후기 더 보기 ▼</span>
-    </div>
-
-    <!-- 펼치면 나오는 카드: 8,000만원 + 연관계정 -->
-    <div class="reviews-more-section" id="reviews-more-section">
-      <div class="review-grid">
-        <div class="review-card accent-bar">
-          <span class="review-tag normal">스마트스토어 · 여성의류</span>
-          <div class="review-amount normal">8,000만원 반환</div>
-          <div class="review-impact">"이 돈 못 받았으면 사업 접어야 했을 수도 있어요."</div>
-          <div class="review-body">
-            직원 급여도, 시즌 물량 대금도 밀려 있는데 <strong>8,000만원이 잠겨버렸어요.</strong> 변호사님이 <strong>법률의견서 들어가고 나서 흐름이 바뀌었고,</strong> 전액 반환받았습니다. <strong>이 돈 못 받았으면 사업 접어야 했을 수도</strong> 있어요.
-          </div>
-          <div class="review-result">✓ 전액 반환 완료</div>
-        </div>
-
-        <div class="review-card green-bar">
-          <span class="review-tag normal">쿠팡 · 생활용품 (3개 계정 운영)</span>
-          <div class="review-amount green">연관계정 2개 해제</div>
-          <div class="review-impact">"혼자 이의 제기해봤자 안 됩니다."</div>
-          <div class="review-body">
-            세 개 다 각각 다른 사업자등록증인데 <strong>IP가 같다는 이유로 다 묶어버렸어요.</strong> 이의 제기해봤자 기계적으로 반려. <strong>변호사님이 법적으로 정리해서 제출하니까 두 개 다 풀렸습니다.</strong>
-          </div>
-          <div class="review-result green">✓ 2개 계정 정지 해제</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mid-cta">
-      <button onclick="openQuizModal()" class="btn-primary">내 상황도 가능한지 확인하기</button>
     </div>
   </div>
 </section>
@@ -1776,57 +1611,6 @@ function createQuizEngine(prefix){
 var inlineQuiz = createQuizEngine('inline');
 var modalQuiz = createQuizEngine('modal');
 
-// Count-up animation
-(function(){
-  function countUp(el, target, duration){
-    var startTime = performance.now();
-    function update(now){
-      var elapsed = now - startTime;
-      var progress = Math.min(elapsed / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString();
-      if(progress < 1){
-        requestAnimationFrame(update);
-      } else {
-        el.textContent = target.toLocaleString();
-        var suffix = el.nextElementSibling;
-        if(suffix && suffix.classList.contains('hp-suffix')) suffix.style.opacity = '1';
-      }
-    }
-    requestAnimationFrame(update);
-  }
-
-  var fired = false;
-  function fireCountUp(){
-    if(fired) return;
-    fired = true;
-    countUp(document.getElementById('count-sellers'), 600, 1500);
-    countUp(document.getElementById('count-amount'), 11, 1500);
-    document.getElementById('count-free').style.opacity = '1';
-  }
-
-  var target = document.getElementById('hero-proof');
-  if(!target) return;
-
-  // Check if already in viewport on load
-  var rect = target.getBoundingClientRect();
-  if(rect.top < window.innerHeight && rect.bottom > 0){
-    fireCountUp();
-    return;
-  }
-
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        fireCountUp();
-        observer.disconnect();
-      }
-    });
-  }, {threshold: 0.1});
-
-  observer.observe(target);
-})();
-
 // 갤러리 마퀴: 밴드가 화면에 들어올 때 이미지 로드 트리거
 // (트랙이 가로로 길어 화면 밖에 있는 카드는 loading="lazy"가 스스로 발동하지 않음)
 (function(){
@@ -1864,18 +1648,6 @@ var modalQuiz = createQuizEngine('modal');
   items.forEach(function(item){ observer.observe(item); });
 })();
 
-// Review more section toggle
-function toggleMoreReviews(){
-  var section = document.getElementById('reviews-more-section');
-  var btn = document.getElementById('reviews-more-btn');
-  if(section.classList.contains('open')){
-    section.classList.remove('open');
-    btn.textContent = '후기 더 보기 ▼';
-  } else {
-    section.classList.add('open');
-    btn.textContent = '접기 ▲';
-  }
-}
 </script>
 
 </body>
